@@ -8,9 +8,23 @@ import android.app.Application;
 
 public class BaseApplication extends Application {
 
+    public static boolean DEBUG = true;
+    public static ConfigManager sConfigManager;
+
     @Override
     public void onCreate() {
         super.onCreate();
+        init();
+    }
+
+    private void init() {
+        sConfigManager = ConfigManager.getInstance();
         CrashHandler.mInstance.init(this);
+
+        refreshConfig();
+    }
+
+    public static void refreshConfig() {
+        DEBUG = sConfigManager.mDebugOn;
     }
 }

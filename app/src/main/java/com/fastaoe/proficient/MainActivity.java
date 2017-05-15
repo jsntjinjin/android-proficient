@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.fastaoe.baselibrary.db.DaoSupportFactory;
+import com.fastaoe.baselibrary.db.IDaoSupport;
 import com.fastaoe.baselibrary.dialog.AlertDialog;
 import com.fastaoe.baselibrary.http.EngineCallback;
 import com.fastaoe.baselibrary.http.HttpUtils;
@@ -16,6 +18,7 @@ import com.fastaoe.framelibrary.BaseSkinActivity;
 import com.fastaoe.framelibrary.DefaultNavigationBar;
 import com.fastaoe.framelibrary.HttpCallback;
 import com.fastaoe.proficient.Model.AbcModel;
+import com.fastaoe.proficient.Model.Person;
 
 import java.util.Map;
 
@@ -51,17 +54,20 @@ public class MainActivity extends BaseSkinActivity {
 
     @Override
     protected void initData() {
-        HttpUtils.with(this).get("url").addParam("a", "b").execute(new HttpCallback<AbcModel>() {
-            @Override
-            public void onSuccess(AbcModel result) {
+//        HttpUtils.with(this).get("url").addParam("a", "b").execute(new HttpCallback<AbcModel>() {
+//            @Override
+//            public void onSuccess(AbcModel result) {
+//
+//            }
+//
+//            @Override
+//            public void onError(Exception e) {
+//
+//            }
+//        });
 
-            }
-
-            @Override
-            public void onError(Exception e) {
-
-            }
-        });
+        IDaoSupport<Person> daoSupport = DaoSupportFactory.getFactory().getDao(Person.class);
+        daoSupport.insert(new Person("张三", 22));
     }
 
     @OnClick({R.id.main_tv1, R.id.main_tv2})
