@@ -6,7 +6,7 @@ package com.fastaoe.baselibrary.utils;
 
 public class DaoUtil {
 
-    public static String getClassName(Class<?> clazz) {
+    public static String getTableName(Class<?> clazz) {
         return clazz.getSimpleName();
     }
 
@@ -26,6 +26,8 @@ public class DaoUtil {
             value = " varchar";
         } else if (type.contains("long")) {
             value = " long";
+        } else {
+            value = " text";
         }
         return value;
     }

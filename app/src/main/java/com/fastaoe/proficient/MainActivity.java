@@ -34,12 +34,7 @@ public class MainActivity extends BaseSkinActivity {
                 .Builder(this)
                 .setTitle("标题")
                 .setRightText("右边")
-                .setRightClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        finish();
-                    }
-                })
+                .setRightClickListener(v -> finish())
                 .builder();
     }
 
@@ -54,17 +49,17 @@ public class MainActivity extends BaseSkinActivity {
 
     @Override
     protected void initData() {
-//        HttpUtils.with(this).get("url").addParam("a", "b").execute(new HttpCallback<AbcModel>() {
-//            @Override
-//            public void onSuccess(AbcModel result) {
-//
-//            }
-//
-//            @Override
-//            public void onError(Exception e) {
-//
-//            }
-//        });
+        //        HttpUtils.with(this).get("url").addParam("a", "b").execute(new HttpCallback<AbcModel>() {
+        //            @Override
+        //            public void onSuccess(AbcModel result) {
+        //
+        //            }
+        //
+        //            @Override
+        //            public void onError(Exception e) {
+        //
+        //            }
+        //        });
 
         IDaoSupport<Person> daoSupport = DaoSupportFactory.getFactory().getDao(Person.class);
         daoSupport.insert(new Person("张三", 22));
