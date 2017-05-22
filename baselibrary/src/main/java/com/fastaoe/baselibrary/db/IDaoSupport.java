@@ -16,4 +16,11 @@ public interface IDaoSupport<T> {
 
     long insert(List<T> datas);
 
+    List<T> queryAll();
+
+    List<T> query();
+
+    long delete();
+
+    long update();
 }

@@ -13,8 +13,6 @@ import java.lang.reflect.Modifier;
 import java.util.List;
 import java.util.Map;
 
-import static android.R.attr.value;
-
 /**
  * Created by jinjin on 17/5/15.
  */
@@ -24,8 +22,7 @@ public class DaoSupport<T> implements IDaoSupport<T> {
     private static final String TAG = "DaoSupport";
 
     private static final Object[] sPutMethodArgs = new Object[2];
-    private static final Map<String, Method> sPutMethods
-            = new ArrayMap<>();
+    private static final Map<String, Method> sPutMethods = new ArrayMap<>();
 
     private SQLiteDatabase mDatabase;
     private Class<T> mClazz;
@@ -78,6 +75,27 @@ public class DaoSupport<T> implements IDaoSupport<T> {
         return count;
     }
 
+    @Override
+    public List<T> queryAll() {
+//        mDatabase.query()
+        return null;
+    }
+
+    @Override
+    public List<T> query() {
+        return null;
+    }
+
+    @Override
+    public long delete() {
+        return 0;
+    }
+
+    @Override
+    public long update() {
+        return 0;
+    }
+
     private ContentValues getContentValues(T o) {
         ContentValues values = new ContentValues();
         Field[] fields = mClazz.getDeclaredFields();
@@ -94,11 +112,10 @@ public class DaoSupport<T> implements IDaoSupport<T> {
                 String fieldTypeName = field.getType().getName();
                 Method putMethod = sPutMethods.get(fieldTypeName);
                 if (putMethod == null) {
-                    putMethod = values.getClass().getDeclaredMethod("put", String.class, sPutMethodArgs[1].getClass());
+                    putMethod = values.getClass()
+                            .getDeclaredMethod("put", String.class, sPutMethodArgs[1].getClass());
                     sPutMethods.put(fieldTypeName, putMethod);
                 }
-
-
                 putMethod.invoke(values, sPutMethodArgs);
             } catch (Exception e) {
                 e.printStackTrace();

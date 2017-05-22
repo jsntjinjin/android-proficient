@@ -73,11 +73,7 @@ public class MainActivity extends BaseSkinActivity {
                 .fullWidth()
                 .fromBottom(true)
                 .show();
-        dialog.setOnClickListener(R.id.main_tv2, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "哈哈哈哈", Toast.LENGTH_LONG).show();
-            }
-        });
+        dialog.setOnClickListener(R.id.main_tv2,
+                v1 -> Toast.makeText(MainActivity.this, "哈哈哈哈", Toast.LENGTH_LONG).show());
     }
 }
