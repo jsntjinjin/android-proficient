@@ -67,7 +67,7 @@ class AlertController {
         SparseArray<CharSequence> textArray = new SparseArray<>();
         // 存放设置监听
         public SparseArray<View.OnClickListener> clickArray = new SparseArray<>();
-        // 狂傲
+        // 宽高
         public int mWidth = ViewGroup.LayoutParams.WRAP_CONTENT;
         public int mHeight = ViewGroup.LayoutParams.WRAP_CONTENT;
         // 动画

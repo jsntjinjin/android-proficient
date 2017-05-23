@@ -10,9 +10,9 @@ import java.lang.annotation.Target;
  */
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.FIELD)
-public @interface Bind {
-    int value();
+@Target(ElementType.METHOD)
+public @interface OnItemClick {
+    int[] value();
 
-    int parentId() default 0;
+    int[] parentId() default 0;
 }

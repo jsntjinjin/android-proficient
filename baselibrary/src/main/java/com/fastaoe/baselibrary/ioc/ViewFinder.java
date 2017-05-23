@@ -29,4 +29,20 @@ class ViewFinder {
         }
         return null;
     }
+
+    public View findViewById(int viewId, int parentId) {
+        View parentView = null;
+        if (parentId > 0) {
+             parentView = findViewById(parentId);
+        }
+
+        View childView = null;
+        if (parentView != null && viewId > 0) {
+            childView = parentView.findViewById(viewId);
+        } else if (viewId > 0) {
+            childView = findViewById(viewId);
+        }
+
+        return childView;
+    }
 }

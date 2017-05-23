@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Toast;
 
 import com.fastaoe.baselibrary.utils.NetStateUtil;
@@ -104,27 +105,24 @@ public class ViewInjectorImpl implements ViewInject {
      * @param clazz
      * @param finder
      */
+    @SuppressWarnings("ConstantConditions")
     private static void injectView(Object handler, Class<?> clazz, ViewFinder finder) throws Exception {
         // 获取class的所有属性
         Field[] fields = clazz.getDeclaredFields();
 
-        // 遍历并找到所有的ViewById注解的属性
+        // 遍历并找到所有的Bind注解的属性
         for (Field field : fields) {
             Bind viewById = field.getAnnotation(Bind.class);
             if (viewById != null) {
-                // 获取ViewById的值
-                int viewId = viewById.value();
-                if (viewId > 0) {
-                    // 获取View
-                    View view = finder.findViewById(viewId);
-                    if (view != null) {
-                        // 反射注入view
-                        field.setAccessible(true);
-                        field.set(handler, view);
-                    } else {
-                        throw new Exception("Invalid @Bind for "
-                                + clazz.getSimpleName() + "." + field.getName());
-                    }
+                // 获取View
+                View view = finder.findViewById(viewById.value(), viewById.parentId());
+                if (view != null) {
+                    // 反射注入view
+                    field.setAccessible(true);
+                    field.set(handler, view);
+                } else {
+                    throw new Exception("Invalid @Bind for "
+                            + clazz.getSimpleName() + "." + field.getName());
                 }
             }
 
@@ -138,25 +136,52 @@ public class ViewInjectorImpl implements ViewInject {
      * @param clazz
      * @param finder
      */
-    private static void injectEvent(Object handler, Class<?> clazz, ViewFinder finder) {
+    @SuppressWarnings("ConstantConditions")
+    private static void injectEvent(Object handler, Class<?> clazz, ViewFinder finder) throws Exception {
         // 获取class所有的方法
         Method[] methods = clazz.getDeclaredMethods();
 
         // 遍历找到onClick注解的方法
         for (Method method : methods) {
             OnClick onClick = method.getAnnotation(OnClick.class);
-            boolean CheckNet = method.getAnnotation(CheckNet.class) != null;
+            OnItemClick onItemClick = method.getAnnotation(OnItemClick.class);
+            boolean checkNet = method.getAnnotation(CheckNet.class) != null;
             if (onClick != null) {
                 // 获取注解中的value值
                 int[] views = onClick.value();
-                if (views.length > 0) {
-                    for (int viewId : views) {
-                        // findViewById找到View
-                        View view = finder.findViewById(viewId);
-                        if (view != null) {
-                            // 设置setOnClickListener反射注入方法
-                            view.setOnClickListener(new MyOnClickListener(method, handler, CheckNet));
-                        }
+                int[] parentIds = onClick.parentId();
+                int parentLen = parentIds == null ? 0 : parentIds.length;
+                for (int i = 0; i < views.length; i++) {
+                    // findViewById找到View
+                    int viewId = views[i];
+                    int parentId = parentLen > i ? parentIds[i] : 0;
+                    View view = finder.findViewById(viewId, parentId);
+                    if (view != null) {
+                        // 设置setOnClickListener反射注入方法
+                        view.setOnClickListener(new MyOnClickListener(method, handler, checkNet));
+                    } else {
+                        throw new Exception("Invalid @OnClick for "
+                                + clazz.getSimpleName() + "." + method.getName());
+                    }
+                }
+            }
+
+            if (onItemClick != null) {
+                // 获取注解中的value值
+                int[] views = onItemClick.value();
+                int[] parentIds = onItemClick.parentId();
+                int parentLen = parentIds == null ? 0 : parentIds.length;
+                for (int i = 0; i < views.length; i++) {
+                    // findViewById找到View
+                    int viewId = views[i];
+                    int parentId = parentLen > i ? parentIds[i] : 0;
+                    AdapterView view = (AdapterView) finder.findViewById(viewId, parentId);
+                    if (view != null) {
+                        // 设置setOnItemClickListener反射注入方法
+                        view.setOnItemClickListener(new MyOnItemClickListener(method, handler, checkNet));
+                    } else {
+                        throw new Exception("Invalid @OnItemClick for "
+                                + clazz.getSimpleName() + "." + method.getName());
                     }
                 }
             }
@@ -190,5 +215,34 @@ public class ViewInjectorImpl implements ViewInject {
             }
         }
     }
+
+    private static class MyOnItemClickListener implements AdapterView.OnItemClickListener {
+        private Method method;
+        private Object handler;
+        private boolean checkNet;
+
+        public MyOnItemClickListener(Method method, Object handler, boolean checkNet) {
+            this.method = method;
+            this.handler = handler;
+            this.checkNet = checkNet;
+        }
+
+        @Override
+        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+            if (checkNet && !NetStateUtil.isNetworkConnected(v.getContext())) {
+                Toast.makeText(v.getContext(), "网络错误!", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // 注入方法
+            try {
+                method.setAccessible(true);
+                method.invoke(handler, parent, v, position, id);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 
 }
