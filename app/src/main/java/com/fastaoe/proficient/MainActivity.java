@@ -91,11 +91,11 @@ public class MainActivity extends BaseSkinActivity {
                 .fullWidth()
                 .fromBottom(true)
                 .setOnCancelListener(dialog1 -> {
-                    Toast.makeText(MainActivity.this, "xixixixi", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "xixixixi", Toast.LENGTH_LONG).show();
                 })
                 .show();
         dialog.setOnClickListener(R.id.main_tv2,
-                v1 -> Toast.makeText(MainActivity.this, "哈哈哈哈", Toast.LENGTH_LONG).show());
+                v1 -> Toast.makeText(this, "哈哈哈哈", Toast.LENGTH_LONG).show());
     }
 
     private List<Map<String, Object>> getData() {
