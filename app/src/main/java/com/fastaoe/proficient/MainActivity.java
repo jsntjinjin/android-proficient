@@ -1,7 +1,8 @@
 package com.fastaoe.proficient;
 
-import android.content.Context;
-import android.content.DialogInterface;
+import android.content.BroadcastReceiver;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.AdapterView;
@@ -13,17 +14,14 @@ import android.widget.Toast;
 import com.fastaoe.baselibrary.db.DaoSupportFactory;
 import com.fastaoe.baselibrary.db.IDaoSupport;
 import com.fastaoe.baselibrary.dialog.AlertDialog;
-import com.fastaoe.baselibrary.http.EngineCallback;
-import com.fastaoe.baselibrary.http.HttpUtils;
 import com.fastaoe.baselibrary.ioc.Bind;
 import com.fastaoe.baselibrary.ioc.CheckNet;
 import com.fastaoe.baselibrary.ioc.ContentView;
 import com.fastaoe.baselibrary.ioc.OnClick;
 import com.fastaoe.baselibrary.ioc.OnItemClick;
+import com.fastaoe.baselibrary.utils.LogUtil;
 import com.fastaoe.framelibrary.BaseSkinActivity;
 import com.fastaoe.framelibrary.DefaultNavigationBar;
-import com.fastaoe.framelibrary.HttpCallback;
-import com.fastaoe.proficient.Model.AbcModel;
 import com.fastaoe.proficient.Model.Person;
 
 import java.util.ArrayList;
@@ -47,6 +45,8 @@ public class MainActivity extends BaseSkinActivity {
                 .setRightText("右边")
                 .setRightClickListener(v -> finish())
                 .builder();
+
+        LogUtil.d("tag", main_tv1.toString());
     }
 
     @Override

@@ -7,4 +7,5 @@ import com.fastaoe.baselibrary.base.BaseActivity;
  */
 
 public abstract class BaseSkinActivity extends BaseActivity {
+
 }
