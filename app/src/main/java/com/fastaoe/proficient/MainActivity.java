@@ -79,8 +79,8 @@ public class MainActivity extends BaseSkinActivity {
         //        });
         main_listview.setAdapter(new SimpleAdapter(this, getData(), R.layout.main_fragment, new String[]{"title"}, new int[]{R.id.main_tv1}));
 
-        IDaoSupport<Person> daoSupport = DaoSupportFactory.getFactory().getDao(Person.class);
-        daoSupport.insert(new Person("张三", 22));
+//        IDaoSupport<Person> daoSupport = DaoSupportFactory.getFactory().getDao(Person.class);
+//        daoSupport.insert(new Person("张三", 22));
     }
 
     @OnClick({R.id.main_tv1, R.id.main_tv2})
