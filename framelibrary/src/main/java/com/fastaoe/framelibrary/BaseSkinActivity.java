@@ -17,8 +17,10 @@ import android.view.ViewParent;
 import com.fastaoe.baselibrary.base.BaseActivity;
 import com.fastaoe.framelibrary.skin.SkinAttrSupport;
 import com.fastaoe.framelibrary.skin.SkinManager;
+import com.fastaoe.framelibrary.skin.SkinResource;
 import com.fastaoe.framelibrary.skin.attr.SkinAttr;
 import com.fastaoe.framelibrary.skin.attr.SkinView;
+import com.fastaoe.framelibrary.skin.callback.ISkinChangeListener;
 import com.fastaoe.framelibrary.skin.support.SkinAppCompatViewInflater;
 
 import java.util.ArrayList;
@@ -28,7 +30,7 @@ import java.util.List;
  * Created by jinjin on 17/5/14.
  */
 
-public abstract class BaseSkinActivity extends BaseActivity implements LayoutInflaterFactory {
+public abstract class BaseSkinActivity extends BaseActivity implements LayoutInflaterFactory, ISkinChangeListener {
 
     private SkinAppCompatViewInflater mAppCompatViewInflater;
 
@@ -47,15 +49,23 @@ public abstract class BaseSkinActivity extends BaseActivity implements LayoutInf
         View view = createView(parent, name, context, attrs);
 
         // 解析属性 src background textcolor
-
         if (view != null) {
             List<SkinAttr> skinAttrs = SkinAttrSupport.getSkinAttrs(context, attrs);
             SkinView skinView = new SkinView(view, skinAttrs);
-        // 交给skinmanager管理
+            // 交给skinmanager管理
             managerSkinView(skinView);
+
+            // 判断要不要换肤
+            SkinManager.getInstance().checkChangeSkin(skinView);
         }
 
         return view;
+    }
+
+    @Override
+    protected void onDestroy() {
+        SkinManager.getInstance().unregister(this);
+        super.onDestroy();
     }
 
     private void managerSkinView(SkinView skinView) {
@@ -109,5 +119,10 @@ public abstract class BaseSkinActivity extends BaseActivity implements LayoutInf
             }
             parent = parent.getParent();
         }
+    }
+
+    @Override
+    public void changeSkin(SkinResource resource) {
+
     }
 }
