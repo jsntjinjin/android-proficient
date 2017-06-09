@@ -23,10 +23,10 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".MessageService"/>
-        <service android:name=".GuardService"
+        <service android:name=".guardService.MessageService"/>
+        <service android:name=".guardService.GuardService"
                  android:process=":guardService"/>
-        <service android:name=".JobWakeUpService"
+        <service android:name=".guardService.JobWakeUpService"
                  android:enabled="true"
                  android:permission="android.permission.BIND_JOB_SERVICE"/>
 

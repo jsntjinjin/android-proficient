@@ -1,4 +1,4 @@
-package com.fastaoe.proficient;
+package com.fastaoe.proficient.guardService;
 
 import android.annotation.TargetApi;
 import android.app.ActivityManager;

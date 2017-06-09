@@ -1,6 +1,5 @@
-package com.fastaoe.proficient;
+package com.fastaoe.proficient.guardService;
 
-import android.app.Notification;
 import android.app.Service;
 import android.content.ComponentName;
 import android.content.Context;
@@ -9,6 +8,8 @@ import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.support.annotation.Nullable;
+
+import com.fastaoe.proficient.ProcessConnection;
 
 /**
  * Created by jinjin on 2017/6/6.
