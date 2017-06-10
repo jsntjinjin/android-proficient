@@ -1,6 +1,7 @@
 package com.fastaoe.proficient;
 
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,21 +18,25 @@ import com.fastaoe.baselibrary.ioc.OnClick;
 @ContentView(R.layout.main_fragment)
 public class TempFragment extends BaseFragment {
 
-    @Bind(R.id.main_tv1)
-    private TextView main_tv1;
+    @Bind(R.id.textview)
+    TextView tv;
+
+    public static TempFragment newInstance(String item) {
+        TempFragment itemFragment = new TempFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("title", item);
+        itemFragment.setArguments(bundle);
+        return itemFragment;
+    }
 
     @Override
     protected void initView() {
-        main_tv1.setText("你好");
     }
 
     @Override
     protected void initData() {
-
+        Bundle bundle = getArguments();
+        tv.setText(bundle.getString("title"));
     }
 
-    @OnClick(R.id.main_tv2)
-    private void onClick(TextView v) {
-        Toast.makeText(this.getActivity(), v.getText().toString(), Toast.LENGTH_LONG).show();
-    }
 }

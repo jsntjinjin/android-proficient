@@ -66,6 +66,7 @@ public class ColorTrackTextView extends AppCompatTextView {
         // 抗锯齿
         paint.setAntiAlias(true);
         // 防抖动
+        paint.setDither(true);
         paint.setTextSize(getTextSize());
         return paint;
     }

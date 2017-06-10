@@ -1,39 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+    android:id="@+id/main_root"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/main_root"
     android:orientation="vertical"
     tools:context="com.fastaoe.proficient.MainActivity">
 
-    <TextView
-        android:id="@+id/main_tv1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"/>
-
-    <TextView
-        android:id="@+id/main_tv2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_toRightOf="@id/main_tv1"
-        android:text="Hello World!"/>
-
-    <ListView
-        android:id="@+id/main_listview"
+    <com.fastaoe.baselibrary.weight.indicator.TrackIndicatorView
+        android:id="@+id/trackView"
+        app:visibleNums="5"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"/>
 
-    </ListView>
-
-    <FrameLayout
-        android:id="@+id/main_fragment"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"/>
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
 
 </LinearLayout>

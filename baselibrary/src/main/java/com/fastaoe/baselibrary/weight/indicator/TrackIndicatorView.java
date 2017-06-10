@@ -5,6 +5,7 @@ import android.content.res.TypedArray;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 
@@ -31,6 +32,8 @@ public class TrackIndicatorView extends HorizontalScrollView implements ViewPage
 
     // 当前的位置
     private int mCurrentPosition = 0;
+
+    private boolean isExecuteScroll = false;
 
     public TrackIndicatorView(Context context) {
         this(context, null);
@@ -76,17 +79,6 @@ public class TrackIndicatorView extends HorizontalScrollView implements ViewPage
 
         // 默认第一个item被点亮
         mAdapter.highLineIndicator(mIndicatorViewGroup.getItemAt(0));
-
-        mIndicatorViewGroup.addBottomLine(mAdapter.getBottomLine());
-    }
-
-    private void setItemClick(View itemView, final int position) {
-        itemView.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mViewpager.setCurrentItem(position);
-            }
-        });
     }
 
     public void setAdapter(IndicatorAdapter adapter, ViewPager viewPager) {
@@ -108,8 +100,14 @@ public class TrackIndicatorView extends HorizontalScrollView implements ViewPage
             mItemWidth = getItemWidth();
 
             for (int i = 0; i < mAdapter.getCount(); i++) {
-                mIndicatorViewGroup.getItemAt(i).getLayoutParams().width = mItemWidth;
+                LinearLayout.LayoutParams layoutParams =
+                        (LinearLayout.LayoutParams) mIndicatorViewGroup.getItemAt(i).getLayoutParams();
+                layoutParams.width = mItemWidth;
+                mIndicatorViewGroup.getItemAt(i).setLayoutParams(layoutParams);
             }
+
+            // 添加底部指示器
+            mIndicatorViewGroup.addBottomLine(mAdapter.getBottomLine(), mItemWidth);
         }
     }
 
@@ -144,21 +142,47 @@ public class TrackIndicatorView extends HorizontalScrollView implements ViewPage
         return itemWidth;
     }
 
+    private void setItemClick(View itemView, final int position) {
+        itemView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 设置选择的viewpager
+                mViewpager.setCurrentItem(position);
+                // 移动IndicatorView
+                smoothScrollCurrentIndicator(position);
+                // 移动下标
+                mIndicatorViewGroup.scrollBottomView(position);
+            }
+        });
+    }
+
     private void scrollCurrentIndicator(int position, float positionOffset) {
         // 当前滑动的位置
         float totalWidth = (position + positionOffset) * mItemWidth;
         // 当前中间tab文字的左边偏移量
-        float offsetScroll = (totalWidth - mItemWidth) / 2;
+        float offsetScroll = (getWidth()     - mItemWidth) / 2;
         int finalScroll = (int) (totalWidth - offsetScroll);
         // 滚动
         scrollTo(finalScroll, 0);
     }
 
+    private void smoothScrollCurrentIndicator(int position) {
+        // 当前滑动的位置
+        float totalWidth = position * mItemWidth;
+        // 当前中间tab文字的左边偏移量
+        float offsetScroll = (getWidth() - mItemWidth) / 2;
+        int finalScroll = (int) (totalWidth - offsetScroll);
+        // 滚动
+        smoothScrollTo(finalScroll, 0);
+    }
+
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
         // 滚动的时候不断调用
-        scrollCurrentIndicator(position, positionOffset);
-
+        if (isExecuteScroll) {
+            scrollCurrentIndicator(position, positionOffset);
+            mIndicatorViewGroup.scrollBottomView(position, positionOffset);
+        }
     }
 
     @Override
@@ -172,6 +196,11 @@ public class TrackIndicatorView extends HorizontalScrollView implements ViewPage
 
     @Override
     public void onPageScrollStateChanged(int state) {
-
+        if (state == 1) {
+            isExecuteScroll = true;
+        }
+        if (state == 0) {
+            isExecuteScroll = false;
+        }
     }
 }

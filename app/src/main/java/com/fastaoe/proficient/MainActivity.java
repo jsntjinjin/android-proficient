@@ -1,67 +1,101 @@
 package com.fastaoe.proficient;
 
-import android.content.BroadcastReceiver;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.support.v4.app.FragmentTransaction;
+import android.graphics.Color;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.view.Gravity;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.fastaoe.baselibrary.db.DaoSupportFactory;
-import com.fastaoe.baselibrary.db.IDaoSupport;
-import com.fastaoe.baselibrary.dialog.AlertDialog;
 import com.fastaoe.baselibrary.ioc.Bind;
-import com.fastaoe.baselibrary.ioc.CheckNet;
 import com.fastaoe.baselibrary.ioc.ContentView;
-import com.fastaoe.baselibrary.ioc.OnClick;
-import com.fastaoe.baselibrary.ioc.OnItemClick;
-import com.fastaoe.baselibrary.utils.LogUtil;
+import com.fastaoe.baselibrary.weight.indicator.IndicatorAdapter;
+import com.fastaoe.baselibrary.weight.indicator.TrackIndicatorView;
 import com.fastaoe.framelibrary.BaseSkinActivity;
 import com.fastaoe.framelibrary.DefaultNavigationBar;
-import com.fastaoe.proficient.Model.Person;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @ContentView(R.layout.activity_main)
 public class MainActivity extends BaseSkinActivity {
 
-    @Bind(R.id.main_tv1)
-    private TextView main_tv1;
-    @Bind(R.id.main_listview)
-    ListView main_listview;
+    private String[] items = {"直播", "推荐", "视频", "段友秀", "图片", "段子", "精华", "同城", "游戏","直播", "推荐", "视频", "段友秀", "图片"};
+
+    @Bind(R.id.trackView)
+    TrackIndicatorView trackView;
+    @Bind(R.id.viewpager)
+    ViewPager viewpager;
 
     @Override
     protected void initTitle() {
         new DefaultNavigationBar
                 .Builder(this)
-                .setTitle("标题")
-                .setRightText("右边")
+                .setTitle("title")
+                .setRightText("right")
                 .setRightClickListener(v -> finish())
                 .builder();
-
-        LogUtil.d("tag", main_tv1.toString());
     }
 
     @Override
     protected void initView() {
-        main_tv1.setText("hahahaha");
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        TempFragment tempFragment = new TempFragment();
-        fragmentTransaction.add(R.id.main_fragment, tempFragment);
-        fragmentTransaction.commit();
+        initViewPager();
+        initIndicator();
     }
 
-    @OnItemClick(R.id.main_listview)
-    @CheckNet
-    private void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-        Toast.makeText(this, id + "", Toast.LENGTH_LONG).show();
+    private void initIndicator() {
+        trackView.setAdapter(new IndicatorAdapter() {
+            @Override
+            public int getCount() {
+                return items.length;
+            }
+
+            @Override
+            public View getView(int position, @Nullable ViewGroup parent) {
+                TextView tv = new TextView(MainActivity.this);
+                tv.setTextSize(14);
+                tv.setText(items[position]);
+                tv.setGravity(Gravity.CENTER);
+                int padding = 20;
+                tv.setPadding(padding, padding, padding, padding);
+                return tv;
+            }
+
+            @Override
+            public View getBottomLine() {
+                View view = new View(MainActivity.this);
+                view.setBackgroundColor(Color.RED);
+                view.setLayoutParams(new ViewGroup.LayoutParams(300, 8));
+                return view;
+            }
+
+            @Override
+            public void highLineIndicator(View view) {
+                TextView textView = (TextView) view;
+                textView.setTextColor(Color.RED);
+            }
+
+            @Override
+            public void restoreLineIndicator(View view) {
+                TextView textView = (TextView) view;
+                textView.setTextColor(Color.BLACK);
+            }
+        }, viewpager);
+    }
+
+    private void initViewPager() {
+        viewpager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
+            @Override
+            public Fragment getItem(int position) {
+                return TempFragment.newInstance(items[position]);
+            }
+
+            @Override
+            public int getCount() {
+                return items.length;
+            }
+        });
     }
 
     @Override
@@ -69,18 +103,23 @@ public class MainActivity extends BaseSkinActivity {
 
     }
 
-    @OnClick({R.id.main_tv1, R.id.main_tv2})
-    private void onClick(TextView v) {
-        AlertDialog dialog = new AlertDialog.Builder(this)
-                .setContentView(R.layout.main_fragment)
-                .setText(R.id.main_tv2, "赵六")
-                .fullWidth()
-                .fromBottom(true)
-                .setOnCancelListener(dialog1 -> {
-                    Toast.makeText(this, "xixixixi", Toast.LENGTH_LONG).show();
-                })
-                .show();
-        dialog.setOnClickListener(R.id.main_tv2,
-                v1 -> Toast.makeText(this, "哈哈哈哈", Toast.LENGTH_LONG).show());
-    }
+    //    @OnItemClick(R.id.main_listview)
+    //    @CheckNet
+    //    private void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+    //        Toast.makeText(this, id + "", Toast.LENGTH_LONG).show();
+    //    }
+    //    @OnClick({R.id.main_tv1, R.id.main_tv2})
+    //    private void onClick(TextView v) {
+    //        AlertDialog dialog = new AlertDialog.Builder(this)
+    //                .setContentView(R.layout.main_fragment)
+    //                .setText(R.id.main_tv2, "赵六")
+    //                .fullWidth()
+    //                .fromBottom(true)
+    //                .setOnCancelListener(dialog1 -> {
+    //                    Toast.makeText(this, "xixixixi", Toast.LENGTH_LONG).show();
+    //                })
+    //                .show();
+    //        dialog.setOnClickListener(R.id.main_tv2,
+    //                v1 -> Toast.makeText(this, "哈哈哈哈", Toast.LENGTH_LONG).show());
+    //    }
 }

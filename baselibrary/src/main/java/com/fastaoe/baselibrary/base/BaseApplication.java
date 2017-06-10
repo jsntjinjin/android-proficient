@@ -19,7 +19,7 @@ public class BaseApplication extends Application {
 
     private void init() {
         sConfigManager = ConfigManager.getInstance();
-        CrashHandler.mInstance.init(this);
+        CrashHandler.getInstance().init(this);
 
         refreshConfig();
     }
