@@ -9,7 +9,7 @@
     android:orientation="vertical"
     tools:context="com.fastaoe.proficient.MainActivity">
 
-    <com.fastaoe.baselibrary.weight.indicator.TrackIndicatorView
+    <com.fastaoe.proficient.weight.indicator.TrackIndicatorView
         android:id="@+id/trackView"
         app:visibleNums="5"
         android:layout_width="match_parent"

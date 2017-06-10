@@ -1,4 +1,4 @@
-package com.fastaoe.baselibrary.weight.indicator;
+package com.fastaoe.proficient.weight.indicator;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;

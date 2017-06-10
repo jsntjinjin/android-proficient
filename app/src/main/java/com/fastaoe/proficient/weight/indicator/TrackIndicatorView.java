@@ -1,15 +1,15 @@
-package com.fastaoe.baselibrary.weight.indicator;
+package com.fastaoe.proficient.weight.indicator;
 
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 
-import com.fastaoe.baselibrary.R;
+import com.fastaoe.proficient.R;
+
 
 /**
  * Created by jinjin on 17/6/9.

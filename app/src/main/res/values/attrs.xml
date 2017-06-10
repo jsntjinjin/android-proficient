@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ColorTrackTextView">
+        <attr name="originColor" format="color"/>
+        <attr name="changeColor" format="color"/>
+    </declare-styleable>
+
+    <declare-styleable name="TrackIndicatorView">
+        <attr name="visibleNums" format="integer"/>
+    </declare-styleable>
+
+    <declare-styleable name="BannerView">
+        <attr name="bvDotFocus" format="color|reference"/>
+        <attr name="bvDotNormal" format="color|reference"/>
+        <attr name="bvDotWidth" format="dimension"/>
+        <attr name="bvDotMargin" format="dimension"/>
+        <attr name="bvDotIndicatorGravity" format="enum">
+            <enum name="center" value="0"/>
+            <enum name="left" value="1"/>
+            <enum name="right" value="2"/>
+        </attr>
+        <attr name="bvBottomColor" format="color|reference"/>
+        <attr name="bvWidthProportion" format="float"/>
+        <attr name="bvHeightProportion" format="float"/>
+    </declare-styleable>
+</resources>

@@ -1,5 +1,6 @@
 package com.fastaoe.proficient;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,20 +9,19 @@ import android.support.v4.view.ViewPager;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.fastaoe.baselibrary.ioc.Bind;
 import com.fastaoe.baselibrary.ioc.ContentView;
-import com.fastaoe.baselibrary.weight.indicator.IndicatorAdapter;
-import com.fastaoe.baselibrary.weight.indicator.TrackIndicatorView;
 import com.fastaoe.framelibrary.BaseSkinActivity;
 import com.fastaoe.framelibrary.DefaultNavigationBar;
+import com.fastaoe.proficient.weight.indicator.IndicatorAdapter;
+import com.fastaoe.proficient.weight.indicator.TrackIndicatorView;
 
 @ContentView(R.layout.activity_main)
 public class MainActivity extends BaseSkinActivity {
 
-    private String[] items = {"直播", "推荐", "视频", "段友秀", "图片", "段子", "精华", "同城", "游戏","直播", "推荐", "视频", "段友秀", "图片"};
+    private String[] items = {"直播", "推荐", "视频", "段友秀", "图片", "段子", "精华", "同城", "游戏", "直播", "推荐", "视频", "段友秀", "图片"};
 
     @Bind(R.id.trackView)
     TrackIndicatorView trackView;
@@ -34,7 +34,10 @@ public class MainActivity extends BaseSkinActivity {
                 .Builder(this)
                 .setTitle("title")
                 .setRightText("right")
-                .setRightClickListener(v -> finish())
+                .setRightClickListener(v -> {
+                    Intent intent = new Intent(this, BannerActivity.class);
+                    startActivity(intent);
+                })
                 .builder();
     }
 
@@ -66,7 +69,7 @@ public class MainActivity extends BaseSkinActivity {
             public View getBottomLine() {
                 View view = new View(MainActivity.this);
                 view.setBackgroundColor(Color.RED);
-                view.setLayoutParams(new ViewGroup.LayoutParams(300, 8));
+                view.setLayoutParams(new ViewGroup.LayoutParams(50, 8));
                 return view;
             }
 

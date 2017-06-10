@@ -1,4 +1,4 @@
-package com.fastaoe.baselibrary.weight.indicator;
+package com.fastaoe.proficient.weight.indicator;
 
 import android.support.annotation.Nullable;
 import android.view.View;

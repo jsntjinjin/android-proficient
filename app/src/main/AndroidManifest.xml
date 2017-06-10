@@ -24,6 +24,8 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".BannerActivity"/>
+
         <service android:name=".guardService.MessageService"/>
         <service android:name=".guardService.GuardService"
                  android:process=":guardService"/>

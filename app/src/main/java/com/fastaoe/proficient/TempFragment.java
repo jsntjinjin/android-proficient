@@ -1,6 +1,7 @@
 package com.fastaoe.proficient;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.widget.TextView;
@@ -37,6 +38,12 @@ public class TempFragment extends BaseFragment {
     protected void initData() {
         Bundle bundle = getArguments();
         tv.setText(bundle.getString("title"));
+    }
+
+    @OnClick(R.id.textview)
+    void showBanner(TextView tv) {
+        Intent intent = new Intent(getActivity(), BannerActivity.class);
+        startActivity(intent);
     }
 
 }

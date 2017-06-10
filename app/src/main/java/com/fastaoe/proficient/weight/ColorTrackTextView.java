@@ -1,4 +1,4 @@
-package com.fastaoe.baselibrary.weight;
+package com.fastaoe.proficient.weight;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -9,9 +9,10 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
 
-import com.fastaoe.baselibrary.R;
 
-import static com.fastaoe.baselibrary.weight.ColorTrackTextView.Direction.LEFT_TO_RIGHT;
+import com.fastaoe.proficient.R;
+
+import static com.fastaoe.proficient.weight.ColorTrackTextView.Direction.LEFT_TO_RIGHT;
 
 /**
  * Created by jinjin on 2017/6/8.
