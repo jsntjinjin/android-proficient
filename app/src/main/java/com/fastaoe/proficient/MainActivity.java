@@ -1,7 +1,10 @@
 package com.fastaoe.proficient;
 
+import android.Manifest;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -13,6 +16,10 @@ import android.widget.TextView;
 
 import com.fastaoe.baselibrary.ioc.Bind;
 import com.fastaoe.baselibrary.ioc.ContentView;
+import com.fastaoe.baselibrary.permission.PermissionFailure;
+import com.fastaoe.baselibrary.permission.PermissionHelper;
+import com.fastaoe.baselibrary.permission.PermissionSuccess;
+import com.fastaoe.baselibrary.utils.LogUtil;
 import com.fastaoe.framelibrary.BaseSkinActivity;
 import com.fastaoe.framelibrary.DefaultNavigationBar;
 import com.fastaoe.proficient.weight.indicator.IndicatorAdapter;
@@ -21,7 +28,7 @@ import com.fastaoe.proficient.weight.indicator.TrackIndicatorView;
 @ContentView(R.layout.activity_main)
 public class MainActivity extends BaseSkinActivity {
 
-    private String[] items = {"直播", "推荐", "视频", "段友秀", "图片", "段子", "精华", "同城", "游戏", "直播", "推荐", "视频", "段友秀", "图片"};
+    private String[] items = {"直播", "推荐", "视频", "段友秀", "图片", "段子", "精华", "同城", "游戏"};
 
     @Bind(R.id.trackView)
     TrackIndicatorView trackView;
@@ -35,10 +42,31 @@ public class MainActivity extends BaseSkinActivity {
                 .setTitle("title")
                 .setRightText("right")
                 .setRightClickListener(v -> {
-                    Intent intent = new Intent(this, BannerActivity.class);
-                    startActivity(intent);
+                    PermissionHelper.with(this)
+                            .requestCode(1)
+                            .permissions(Manifest.permission.CALL_PHONE)
+                            .request();
                 })
                 .builder();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        PermissionHelper.onRequestPermissionsResult(this, requestCode, permissions);
+    }
+
+    @PermissionSuccess(requestCode = 1)
+    private void callSuccess() {
+        Intent intent = new Intent();
+        Uri parse = Uri.parse("tel:" + "15862932131");
+        intent.setData(parse);
+        startActivity(intent);
+    }
+
+    @PermissionFailure(requestCode = 1)
+    private void callFailure() {
+        LogUtil.e("tag", "拒绝call");
     }
 
     @Override
