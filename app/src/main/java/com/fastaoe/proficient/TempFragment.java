@@ -12,15 +12,14 @@ import com.fastaoe.baselibrary.ioc.Bind;
 import com.fastaoe.baselibrary.ioc.ContentView;
 import com.fastaoe.baselibrary.ioc.OnClick;
 
+import static android.R.attr.banner;
+
 /**
  * Created by jinjin on 17/5/14.
  */
 
 @ContentView(R.layout.main_fragment)
 public class TempFragment extends BaseFragment {
-
-    @Bind(R.id.textview)
-    TextView tv;
 
     public static TempFragment newInstance(String item) {
         TempFragment itemFragment = new TempFragment();
@@ -37,12 +36,18 @@ public class TempFragment extends BaseFragment {
     @Override
     protected void initData() {
         Bundle bundle = getArguments();
-        tv.setText(bundle.getString("title"));
+        //        banner.setText(bundle.getString("title"));
     }
 
-    @OnClick(R.id.textview)
+    @OnClick(R.id.banner)
     void showBanner(TextView tv) {
         Intent intent = new Intent(getActivity(), BannerActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.chat)
+    void chat(TextView tv) {
+        Intent intent = new Intent(getActivity(), ChatActivity.class);
         startActivity(intent);
     }
 

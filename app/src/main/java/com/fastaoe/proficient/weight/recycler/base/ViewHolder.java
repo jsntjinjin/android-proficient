@@ -1,4 +1,4 @@
-package com.fastaoe.proficient.weight.recycler;
+package com.fastaoe.proficient.weight.recycler.base;
 
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseArray;

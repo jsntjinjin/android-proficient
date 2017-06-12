@@ -1,4 +1,4 @@
-package com.fastaoe.proficient.weight.recycler;
+package com.fastaoe.proficient.weight.recycler.base;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -17,17 +17,34 @@ public abstract class RecyclerAdapter<T> extends RecyclerView.Adapter<ViewHolder
     private int layoutId;
     private List<T> data;
     private LayoutInflater inflater;
+    private MuliteTypeSupport typeSupport;
 
-    public RecyclerAdapter(Context context,int layoutId, List<T> data) {
+    public RecyclerAdapter(Context context, List<T> data, int layoutId) {
         this.layoutId = layoutId;
         this.data = data;
         this.inflater = LayoutInflater.from(context);
     }
 
+    public RecyclerAdapter(Context context, List<T> data, MuliteTypeSupport typeSupport) {
+        this(context, data, -1);
+        this.typeSupport = typeSupport;
+    }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        if (typeSupport != null) {
+            layoutId = viewType;
+        }
         View view = inflater.inflate(layoutId, parent, false);
         return new ViewHolder(view);
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (typeSupport != null) {
+            return typeSupport.getLayoutId(data.get(position));
+        }
+        return super.getItemViewType(position);
     }
 
     @Override
@@ -36,6 +53,8 @@ public abstract class RecyclerAdapter<T> extends RecyclerView.Adapter<ViewHolder
 
         if (listener != null) {
             holder.itemView.setOnClickListener(v -> listener.onItemClick(position));
+        }
+        if (longClickListener != null) {
             holder.itemView.setOnLongClickListener(v -> longClickListener.onItemLongClick(position));
         }
     }

@@ -3,10 +3,10 @@
        android:shape="rectangle">
 
     <size
-        android:width="10dp"
-        android:height="10dp"/>
+        android:width="2dp"
+        android:height="2dp"/>
 
-    <solid android:color="#ffff00"/>
+    <solid android:color="#666666"/>
 
     <!--<gradient android:startColor="#ff0000" android:endColor="#00ffff"/>-->
 </shape>

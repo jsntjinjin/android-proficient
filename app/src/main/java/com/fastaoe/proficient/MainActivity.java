@@ -41,12 +41,11 @@ public class MainActivity extends BaseSkinActivity {
                 .Builder(this)
                 .setTitle("title")
                 .setRightText("right")
-                .setRightClickListener(v -> {
-                    PermissionHelper.with(this)
-                            .requestCode(1)
-                            .permissions(Manifest.permission.CALL_PHONE)
-                            .request();
-                })
+                .setRightClickListener(v ->
+                        PermissionHelper.with(MainActivity.this)
+                                .requestCode(1)
+                                .permissions(Manifest.permission.CALL_PHONE)
+                                .request())
                 .builder();
     }
 

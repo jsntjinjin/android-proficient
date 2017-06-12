@@ -3,6 +3,7 @@ package com.fastaoe.proficient.weight.banner;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.PagerAdapter;
@@ -10,6 +11,8 @@ import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.fastaoe.baselibrary.utils.LogUtil;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -27,15 +30,7 @@ public class BannerViewPager extends ViewPager {
 
     private BannerAdapter mBannerAdapter;
 
-    private Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            setCurrentItem(getCurrentItem() + 1);
-
-            // 轮询
-            startRoll();
-        }
-    };
+    private Handler mHandler;
 
     // View复用
     private List<View> mConvertViews;
@@ -71,7 +66,18 @@ public class BannerViewPager extends ViewPager {
         }
 
         mConvertViews = new ArrayList<>();
+        initHandler();
+    }
 
+    private void initHandler() {
+       mHandler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                setCurrentItem(getCurrentItem() + 1);
+                // 轮询
+                startRoll();
+            }
+        };
     }
 
     /**
@@ -85,7 +91,7 @@ public class BannerViewPager extends ViewPager {
         setAdapter(new BannerPagerAdapter());
 
         // 管理activity的生命周期
-        ((Activity)getContext()).getApplication().registerActivityLifecycleCallbacks(callbacks);
+//        ((Activity) getContext()).getApplication().registerActivityLifecycleCallbacks(callbacks);
     }
 
     /**
@@ -101,10 +107,22 @@ public class BannerViewPager extends ViewPager {
      */
     @Override
     protected void onDetachedFromWindow() {
-        mHandler.removeMessages(SCROLL_MESSAGE);
-        mHandler = null;
-        ((Activity)getContext()).getApplication().unregisterActivityLifecycleCallbacks(callbacks);
+        if (mHandler != null) {
+            mHandler.removeMessages(SCROLL_MESSAGE);
+            ((Activity) getContext()).getApplication().unregisterActivityLifecycleCallbacks(callbacks);
+            mHandler = null;
+        }
         super.onDetachedFromWindow();
+    }
+
+    @Override
+    protected void onAttachedToWindow() {
+        if (mBannerAdapter != null) {
+            initHandler();
+            startRoll();
+            ((Activity) getContext()).getApplication().registerActivityLifecycleCallbacks(callbacks);
+        }
+        super.onAttachedToWindow();
     }
 
     /**
@@ -156,9 +174,9 @@ public class BannerViewPager extends ViewPager {
     }
 
     private View getConvertView() {
-        for (View convertView : mConvertViews) {
-            if (convertView.getParent() == null) {
-                return convertView;
+        for (int i = 0; i < mConvertViews.size(); i++) {
+            if (mConvertViews.get(i).getParent() == null) {
+                return mConvertViews.get(i);
             }
         }
         return null;
