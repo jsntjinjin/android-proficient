@@ -8,6 +8,8 @@ import com.fastaoe.baselibrary.ioc.ContentView;
 import com.fastaoe.baselibrary.utils.LogUtil;
 import com.fastaoe.framelibrary.BaseSkinActivity;
 import com.fastaoe.framelibrary.DefaultNavigationBar;
+import com.fastaoe.proficient.Constants;
+import com.fastaoe.proficient.MyBaseApplication;
 import com.fastaoe.proficient.R;
 import com.fastaoe.proficient.weight.banner.BannerAdapter;
 import com.fastaoe.proficient.weight.banner.BannerView;
@@ -31,7 +33,9 @@ public class BannerViewActivity extends BaseSkinActivity {
     protected void initTitle() {
         new DefaultNavigationBar
                 .Builder(this)
+                .setTypeface(MyBaseApplication.sTypeface)
                 .setTitle("banner")
+                .setLeftIcon(Constants.ICON_ADD)
                 .builder();
     }
 

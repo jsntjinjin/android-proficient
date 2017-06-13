@@ -80,4 +80,22 @@
     <color name="mifi_failure_middle">#ff988e</color>
     <color name="mifi_failure_inner">#ffbcb4</color>
 
+    <!--......................-->
+
+    <color name="comment_dialog_bg">#fff5f0ec</color>
+    <color name="comment_dialog_content_text">#ff5c6266</color>
+    <color name="list_item_divider">#ffe6e6e6</color>
+    <color name="comment_dialog_share_text">#ff333333</color>
+    <color name="comment_dialog_submit_text">#ffffffff</color>
+
+    <color name="main_bg_color">#2F2FFF</color>
+    <color name="main_text_color">#FFFFFF</color>
+
+    <color name="media_choose_op_btn_disabled">#ffffffff</color>
+    <color name="media_choose_op_btn_enabled">#ffff819f</color>
+    <color name="white">#ffffffff</color>
+    <color name="media_choose_item_shadow">#cc000000</color>
+
+    <color name="tab_text_highlight">#ff735646</color>
+    <color name="tab_text_normal">#ff999999</color>
 </resources>

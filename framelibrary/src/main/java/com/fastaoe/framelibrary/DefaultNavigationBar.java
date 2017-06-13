@@ -2,6 +2,9 @@ package com.fastaoe.framelibrary;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Typeface;
+import android.text.Html;
+import android.text.Spanned;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,14 +30,26 @@ public class DefaultNavigationBar extends AbsNavigationBar<DefaultNavigationBar.
     @Override
     public void applyView() {
         // 绑定参数
-        setText(R.id.bar_title, getParams().mTitle);
-        setText(R.id.bar_right_text, getParams().mRightText);
+        setText(R.id.bar_title, null, getParams().mTitle);
+        setText(R.id.bar_right_text, getParams().mTypeface, getText(getParams().mRightText, getParams().mRightTextIcon));
+        setText(R.id.bar_left_text, getParams().mTypeface, getText(getParams().mLeftText, getParams().mLeftTextIcon));
         setOnClickListener(R.id.bar_left_text, getParams().mLeftListener);
         setOnClickListener(R.id.bar_right_text, getParams().mRightListener);
     }
 
-    private void setText(int viewId, String text) {
+    private CharSequence getText(String text, String icon) {
+        if (!TextUtils.isEmpty(text)) {
+            return text;
+        } else {
+            return getHtmlText(icon);
+        }
+    }
+
+    private void setText(int viewId, Typeface typeface, CharSequence text) {
         TextView textView = findViewById(viewId);
+        if (typeface != null) {
+            textView.setTypeface(typeface);
+        }
         if (!TextUtils.isEmpty(text)) {
             textView.setText(text);
             textView.setVisibility(View.VISIBLE);
@@ -46,6 +61,10 @@ public class DefaultNavigationBar extends AbsNavigationBar<DefaultNavigationBar.
         if (listener != null) {
             view.setOnClickListener(listener);
         }
+    }
+
+    private Spanned getHtmlText(String which) {
+        return Html.fromHtml(which);
     }
 
     public static class Builder extends AbsNavigationBar.Builder {
@@ -80,7 +99,22 @@ public class DefaultNavigationBar extends AbsNavigationBar<DefaultNavigationBar.
         }
 
         public Builder setRightIcon(String rightIcon) {
-            P.mRightText = rightIcon;
+            P.mRightTextIcon = rightIcon;
+            return this;
+        }
+
+        public Builder setTypeface(Typeface typeface) {
+            P.mTypeface = typeface;
+            return this;
+        }
+
+        public Builder setLeftText(String leftText) {
+            P.mLeftText = leftText;
+            return this;
+        }
+
+        public Builder setLeftIcon(String leftIcon) {
+            P.mLeftTextIcon = leftIcon;
             return this;
         }
 
@@ -98,12 +132,18 @@ public class DefaultNavigationBar extends AbsNavigationBar<DefaultNavigationBar.
 
             // 所有的参数
             public String mTitle;
+            public String mLeftText;
+            public String mLeftTextIcon = "&#xe614;";
             public String mRightText;
+            public String mRightTextIcon;
+
+            public Typeface mTypeface;
+
             public View.OnClickListener mRightListener;
             public View.OnClickListener mLeftListener = new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ((Activity)mContext).finish();
+                    ((Activity) mContext).finish();
                 }
             };
 
