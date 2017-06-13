@@ -70,7 +70,7 @@ public class BannerViewPager extends ViewPager {
     }
 
     private void initHandler() {
-       mHandler = new Handler() {
+        mHandler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
                 setCurrentItem(getCurrentItem() + 1);
@@ -91,15 +91,17 @@ public class BannerViewPager extends ViewPager {
         setAdapter(new BannerPagerAdapter());
 
         // 管理activity的生命周期
-//        ((Activity) getContext()).getApplication().registerActivityLifecycleCallbacks(callbacks);
+        //        ((Activity) getContext()).getApplication().registerActivityLifecycleCallbacks(callbacks);
     }
 
     /**
      * 设置自动轮播
      */
     public void startRoll() {
-        mHandler.removeMessages(SCROLL_MESSAGE);
-        mHandler.sendEmptyMessageDelayed(SCROLL_MESSAGE, mRollTime);
+        if (mHandler != null) {
+            mHandler.removeMessages(SCROLL_MESSAGE);
+            mHandler.sendEmptyMessageDelayed(SCROLL_MESSAGE, mRollTime);
+        }
     }
 
     /**

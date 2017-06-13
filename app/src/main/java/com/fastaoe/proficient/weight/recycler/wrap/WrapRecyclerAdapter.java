@@ -1,9 +1,12 @@
-package com.fastaoe.proficient.weight.recycler.base;
+package com.fastaoe.proficient.weight.recycler.wrap;
 
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.fastaoe.proficient.weight.recycler.base.ViewHolder;
 
 /**
  * Created by jinjin on 17/6/12.
@@ -106,5 +109,39 @@ public class WrapRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
         notifyDataSetChanged();
 
+    }
+
+    /**
+     * 是不是底部位置
+     */
+    private boolean isFooterPosition(int position) {
+        return position >= (headers.size() + adapter.getItemCount());
+    }
+
+    /**
+     * 是不是头部位置
+     */
+    private boolean isHeaderPosition(int position) {
+        return position < headers.size();
+    }
+
+    /**
+     * 解决GridLayoutManager添加头部和底部不占用一行的问题
+     *
+     * @param recycler
+     * @version 1.0
+     */
+    public void adjustSpanSize(RecyclerView recycler) {
+        if (recycler.getLayoutManager() instanceof GridLayoutManager) {
+            final GridLayoutManager layoutManager = (GridLayoutManager) recycler.getLayoutManager();
+            layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                @Override
+                public int getSpanSize(int position) {
+                    boolean isHeaderOrFooter =
+                            isHeaderPosition(position) || isFooterPosition(position);
+                    return isHeaderOrFooter ? layoutManager.getSpanCount() : 1;
+                }
+            });
+        }
     }
 }

@@ -45,9 +45,21 @@ public class TempFragment extends BaseFragment {
         startActivity(intent);
     }
 
+    @OnClick(R.id.recycler)
+    void recycler(TextView tv) {
+        Intent intent = new Intent(getActivity(), RecyclerActivity.class);
+        startActivity(intent);
+    }
+
     @OnClick(R.id.chat)
     void chat(TextView tv) {
         Intent intent = new Intent(getActivity(), ChatActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.refresh)
+    void refresh(TextView tv) {
+        Intent intent = new Intent(getActivity(), RefreshActivity.class);
         startActivity(intent);
     }
 

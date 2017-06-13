@@ -1,6 +1,6 @@
 package com.fastaoe.proficient;
 
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -15,8 +15,7 @@ import com.fastaoe.proficient.weight.banner.BannerView;
 import com.fastaoe.proficient.weight.recycler.LinearLayoutItemDecoration;
 import com.fastaoe.proficient.weight.recycler.base.RecyclerAdapter;
 import com.fastaoe.proficient.weight.recycler.base.ViewHolder;
-import com.fastaoe.proficient.weight.recycler.base.WrapRecyclerView;
-import com.squareup.picasso.Picasso;
+import com.fastaoe.proficient.weight.recycler.wrap.WrapRecyclerView;
 
 import org.xutils.x;
 
@@ -66,7 +65,7 @@ public class ChatActivity extends BaseSkinActivity {
         urls.add("http://7xsftu.com1.z0.glb.clouddn.com/d.jpg");
         initBanner(urls, (BannerView) header.findViewById(R.id.banner_view));
 
-        recycler_view.setLayoutManager(new LinearLayoutManager(this));
+        recycler_view.setLayoutManager(new GridLayoutManager(this, 3));
         recycler_view.setAdapter(initRecyclerAdapter(list));
         recycler_view.addItemDecoration(new LinearLayoutItemDecoration(this, R.drawable.item_dirver_01));
 

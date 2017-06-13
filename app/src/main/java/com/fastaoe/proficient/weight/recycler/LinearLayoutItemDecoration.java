@@ -35,7 +35,7 @@ public class LinearLayoutItemDecoration extends RecyclerView.ItemDecoration {
         rect.left = parent.getPaddingLeft();
         rect.right = parent.getWidth() - parent.getPaddingRight();
 
-        for (int i = 0; i < childCount; i++) {
+        for (int i = 1; i < childCount; i++) {
             rect.bottom = parent.getChildAt(i).getTop();
             rect.top = rect.bottom - drawable.getIntrinsicHeight();
             drawable.setBounds(rect);

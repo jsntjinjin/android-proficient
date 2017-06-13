@@ -27,6 +27,8 @@
 
         <activity android:name=".BannerActivity"/>
         <activity android:name=".ChatActivity"/>
+        <activity android:name=".RefreshActivity"/>
+        <activity android:name=".RecyclerActivity"/>
 
         <service android:name=".guardService.MessageService"/>
         <service android:name=".guardService.GuardService"

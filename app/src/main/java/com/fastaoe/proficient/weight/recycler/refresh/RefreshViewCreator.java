@@ -1,4 +1,4 @@
-package com.fastaoe.proficient.weight.recycler.base;
+package com.fastaoe.proficient.weight.recycler.refresh;
 
 import android.content.Context;
 import android.view.View;
