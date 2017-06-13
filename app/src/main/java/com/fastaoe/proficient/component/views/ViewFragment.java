@@ -36,8 +36,16 @@ public class ViewFragment extends BaseFragment {
 
     @OnClick(R.id.banner)
     void showBanner(TextView tv) {
-        Intent intent = new Intent(getActivity(), BannerActivity.class);
+        Intent intent = new Intent(getActivity(), BannerViewActivity.class);
         startActivity(intent);
     }
+
+    @OnClick(R.id.dialog)
+    void showDialog(TextView tv) {
+        Intent intent = new Intent(getActivity(), DialogViewActivity.class);
+        startActivity(intent);
+    }
+
+
 
 }

@@ -4,7 +4,80 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
-    <color name="main_background">#ffffff</color>
-    <color name="common_bg_black">#303F9F</color>
+    <color name="common_bg_black">#242427</color>
+    <color name="common_bg_bar_grey">#f7f7f8</color>
+
+    <color name="common_bg_orange">#fe7900</color>
+    <color name="common_bg_pressed_orange">#eb7001</color>
+    <color name="common_bg_enable_false">#a7a7a7</color>
+
+    <color name="common_bg_grey">#efefef</color>
+    <color name="common_bg_bar_black">#242328</color>
+    <color name="common_bg_oval">#cccccc</color>
+
+    <color name="common_line_grey">#a7a7a7</color>
+    <color name="common_line_french_grey">#e4e4e4</color>
+    <color name="common_line_grey_dark">#403f45</color>
+    <color name="common_line_middle_grey">#505050</color>
+    <color name="common_divider">#e4e4e4</color>
+
+    <color name="text_orange">#fd7a00</color>
+    <color name="text_grey">#a7a7a7</color>
+    <color name="text_clickable">#807f86</color>
+    <color name="text_title">#ffffff</color>
+    <color name="text_list_primary">#303030</color>
+    <color name="text_captions">#a7a7a7</color>
+    <color name="text_hint">#c7c7c7</color>
+    <color name="text_crpv">#cecece</color>
+    <color name="text_black">#000000</color>
+    <color name="text_blue">#00aaee</color>
+    <color name="text_dialog_blue">#007bfe</color>
+
+    <!-- 自定义环-->
+    <color name="spv_bg">#00242427</color>
+    <color name="svp_fgColor">#242427</color>
+    <!--#fcc600-->
+
+    <color name="wifi_ad_handle_collapse">#313038</color>
+    <color name="wifi_ad_handle_expand">#cacaca</color>
+
+    <!-- .............................-->
+    <color name="common_bg_white">#ffffff</color>
+    <color name="common_bg_blue">#5aafee</color>
+
+    <color name="common_text_white">#ffffff</color>
+    <color name="common_text_grey">#999999</color>
+    <color name="common_text_blue">#5aafee</color>
+    <color name="common_text_red">#ff5442</color>
+    <color name="common_text">#333333</color>
+    <color name="text_list_secondary">#656565</color>
+
+    <color name="common_line">#e4e4e4</color>
+    <color name="common_line_pay">#999999</color>
+
+    <color name="mifi_btn_connect_normal">#cccccc</color>
+    <color name="mifi_btn_connect_success">#5aafee</color>
+    <color name="mifi_btn_bg_orange">#ffe7c8</color>
+
+    <color name="common_btn_enable_false">#cccccc</color>
+    <color name="common_btn_blue">#5aafee</color>
+    <color name="common_btn_pressed">#3a8ecd</color>
+
+    <color name="common_et_text">#333333</color>
+    <color name="common_et_text_hint">#cccccc</color>
+    <color name="common_et_bg_no_focus">#999999</color>
+    <color name="common_et_bg_focus">#5aafee</color>
+
+    <color name="mifi_normal_outer">#b7c2ce</color>
+    <color name="mifi_normal_middle">#d4d9df</color>
+    <color name="mifi_normal_inner">#ffffff</color>
+
+    <color name="mifi_success_outer">#82caff</color>
+    <color name="mifi_success_middle">#afddff</color>
+    <color name="mifi_success_inner">#dff1ff</color>
+
+    <color name="mifi_failure_outer">#ff6b5c</color>
+    <color name="mifi_failure_middle">#ff988e</color>
+    <color name="mifi_failure_inner">#ffbcb4</color>
 
 </resources>

@@ -26,7 +26,8 @@
         </activity>
 
         <!--view-->
-        <activity android:name=".component.views.BannerActivity"/>
+        <activity android:name=".component.views.BannerViewActivity"/>
+        <activity android:name=".component.views.DialogViewActivity"/>
 
         <!--recycler-->
         <activity android:name=".component.recycler.NormalRecyclerActivity"/>

@@ -7,6 +7,7 @@ import com.fastaoe.baselibrary.ioc.Bind;
 import com.fastaoe.baselibrary.ioc.ContentView;
 import com.fastaoe.baselibrary.utils.LogUtil;
 import com.fastaoe.framelibrary.BaseSkinActivity;
+import com.fastaoe.framelibrary.DefaultNavigationBar;
 import com.fastaoe.proficient.R;
 import com.fastaoe.proficient.weight.banner.BannerAdapter;
 import com.fastaoe.proficient.weight.banner.BannerView;
@@ -20,15 +21,18 @@ import java.util.List;
  * Created by jinjin on 2017/6/10.
  */
 
-@ContentView(R.layout.activity_banner)
-public class BannerActivity extends BaseSkinActivity {
+@ContentView(R.layout.activity_view_banner)
+public class BannerViewActivity extends BaseSkinActivity {
 
     @Bind(R.id.banner_view)
     BannerView banner_view;
 
     @Override
     protected void initTitle() {
-
+        new DefaultNavigationBar
+                .Builder(this)
+                .setTitle("banner")
+                .builder();
     }
 
     @Override
@@ -54,7 +58,7 @@ public class BannerActivity extends BaseSkinActivity {
             public View getView(int position, View convertViews) {
                 ImageView banner = null;
                 if (convertViews == null) {
-                    banner = new ImageView(BannerActivity.this);
+                    banner = new ImageView(BannerViewActivity.this);
                     banner.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 } else {
                     banner = (ImageView) convertViews;
