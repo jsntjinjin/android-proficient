@@ -28,6 +28,8 @@
         <!--view-->
         <activity android:name=".component.views.BannerViewActivity"/>
         <activity android:name=".component.views.DialogViewActivity"/>
+        <activity android:name=".component.views.SelectImageActivity"/>
+        <activity android:name=".component.views.ImageTestActivity"/>
 
         <!--recycler-->
         <activity android:name=".component.recycler.NormalRecyclerActivity"/>

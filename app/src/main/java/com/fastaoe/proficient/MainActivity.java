@@ -42,6 +42,7 @@ public class MainActivity extends BaseSkinActivity {
         new DefaultNavigationBar
                 .Builder(this)
                 .setTitle("我的资料站")
+                .hideLeftText()
                 .setRightText("right")
                 .setRightClickListener(v ->
                         PermissionHelper.with(MainActivity.this)

@@ -40,8 +40,10 @@ public class DefaultNavigationBar extends AbsNavigationBar<DefaultNavigationBar.
     private CharSequence getText(String text, String icon) {
         if (!TextUtils.isEmpty(text)) {
             return text;
-        } else {
+        } else if (!TextUtils.isEmpty(icon)) {
             return getHtmlText(icon);
+        } else {
+            return null;
         }
     }
 
@@ -103,11 +105,6 @@ public class DefaultNavigationBar extends AbsNavigationBar<DefaultNavigationBar.
             return this;
         }
 
-        public Builder setTypeface(Typeface typeface) {
-            P.mTypeface = typeface;
-            return this;
-        }
-
         public Builder setLeftText(String leftText) {
             P.mLeftText = leftText;
             return this;
@@ -115,6 +112,18 @@ public class DefaultNavigationBar extends AbsNavigationBar<DefaultNavigationBar.
 
         public Builder setLeftIcon(String leftIcon) {
             P.mLeftTextIcon = leftIcon;
+            return this;
+        }
+
+        public Builder hideLeftText() {
+            P.mLeftText = null;
+            P.mLeftTextIcon = null;
+            return this;
+        }
+
+        public Builder hideRightText() {
+            P.mRightText = null;
+            P.mRightTextIcon = null;
             return this;
         }
 
@@ -137,7 +146,7 @@ public class DefaultNavigationBar extends AbsNavigationBar<DefaultNavigationBar.
             public String mRightText;
             public String mRightTextIcon;
 
-            public Typeface mTypeface;
+            public Typeface mTypeface = Typeface.createFromAsset(mContext.getAssets(), "iconfont.ttf");
 
             public View.OnClickListener mRightListener;
             public View.OnClickListener mLeftListener = new View.OnClickListener() {

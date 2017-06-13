@@ -46,6 +46,10 @@ public class ViewFragment extends BaseFragment {
         startActivity(intent);
     }
 
-
+    @OnClick(R.id.image_choose)
+    void chooseImage(TextView tv) {
+        Intent intent = new Intent(getActivity(), ImageTestActivity.class);
+        startActivity(intent);
+    }
 
 }
