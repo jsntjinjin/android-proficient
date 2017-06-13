@@ -2,6 +2,8 @@ package com.fastaoe.baselibrary.db;
 
 import android.database.sqlite.SQLiteDatabase;
 
+import com.fastaoe.baselibrary.db.crud.QuerySupport;
+
 import java.util.List;
 
 /**
@@ -16,11 +18,10 @@ public interface IDaoSupport<T> {
 
     long insert(List<T> datas);
 
-    List<T> queryAll();
+    // 获取专门查询的支持类
+    QuerySupport<T> querySupport();
 
-    List<T> query();
+    int delete(String whereClause, String... whereArgs);
 
-    long delete();
-
-    long update();
+    int update(T obj, String whereClause, String... whereArgs);
 }

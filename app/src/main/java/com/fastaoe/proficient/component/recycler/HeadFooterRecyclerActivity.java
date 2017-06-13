@@ -1,6 +1,7 @@
-package com.fastaoe.proficient;
+package com.fastaoe.proficient.component.recycler;
 
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -10,6 +11,7 @@ import com.fastaoe.baselibrary.ioc.ContentView;
 import com.fastaoe.baselibrary.utils.LogUtil;
 import com.fastaoe.framelibrary.BaseSkinActivity;
 import com.fastaoe.framelibrary.DefaultNavigationBar;
+import com.fastaoe.proficient.R;
 import com.fastaoe.proficient.weight.banner.BannerAdapter;
 import com.fastaoe.proficient.weight.banner.BannerView;
 import com.fastaoe.proficient.weight.recycler.LinearLayoutItemDecoration;
@@ -27,8 +29,8 @@ import java.util.List;
  * description:
  */
 
-@ContentView(R.layout.activity_chat)
-public class ChatActivity extends BaseSkinActivity {
+@ContentView(R.layout.activity_recycler_items)
+public class HeadFooterRecyclerActivity extends BaseSkinActivity {
 
     @Bind(R.id.recycler_view)
     WrapRecyclerView recycler_view;
@@ -37,7 +39,7 @@ public class ChatActivity extends BaseSkinActivity {
     protected void initTitle() {
         new DefaultNavigationBar
                 .Builder(this)
-                .setTitle("chat")
+                .setTitle("带头部和底部的recycler")
                 .builder();
     }
 
@@ -57,7 +59,11 @@ public class ChatActivity extends BaseSkinActivity {
             }
         }
 
-        View header = LayoutInflater.from(this).inflate(R.layout.item_chat_header, null);
+        recycler_view.setLayoutManager(new LinearLayoutManager(this));
+        recycler_view.setAdapter(initRecyclerAdapter(list));
+        recycler_view.addItemDecoration(new LinearLayoutItemDecoration(this, R.drawable.item_dirver_01));
+
+        View header = LayoutInflater.from(this).inflate(R.layout.item_chat_header, recycler_view, false);
         List<String> urls = new ArrayList<>();
         urls.add("http://7xsftu.com1.z0.glb.clouddn.com/a.jpg");
         urls.add("http://7xsftu.com1.z0.glb.clouddn.com/b.jpg");
@@ -65,13 +71,10 @@ public class ChatActivity extends BaseSkinActivity {
         urls.add("http://7xsftu.com1.z0.glb.clouddn.com/d.jpg");
         initBanner(urls, (BannerView) header.findViewById(R.id.banner_view));
 
-        recycler_view.setLayoutManager(new GridLayoutManager(this, 3));
-        recycler_view.setAdapter(initRecyclerAdapter(list));
-        recycler_view.addItemDecoration(new LinearLayoutItemDecoration(this, R.drawable.item_dirver_01));
 
 
         recycler_view.addHeaderView(header);
-        recycler_view.addFooterView(LayoutInflater.from(this).inflate(R.layout.item_chat_footer, null));
+        recycler_view.addFooterView(LayoutInflater.from(this).inflate(R.layout.item_chat_footer, recycler_view, false));
     }
 
     // 初始化banner
@@ -81,14 +84,12 @@ public class ChatActivity extends BaseSkinActivity {
             public View getView(int position, View convertViews) {
                 ImageView banner = null;
                 if (convertViews == null) {
-                    banner = new ImageView(ChatActivity.this);
+                    banner = new ImageView(HeadFooterRecyclerActivity.this);
                     banner.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 } else {
                     banner = (ImageView) convertViews;
                 }
 
-//                Picasso.with(ChatActivity.this).load(urls.get(position))
-//                        .placeholder(R.mipmap.ic_launcher).into(banner);
                 x.image().bind(banner, urls.get(position));
                 return banner;
             }

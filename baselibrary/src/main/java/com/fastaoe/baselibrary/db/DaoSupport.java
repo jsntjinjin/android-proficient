@@ -4,7 +4,7 @@ import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v4.util.ArrayMap;
 
-import com.fastaoe.baselibrary.utils.DaoUtil;
+import com.fastaoe.baselibrary.db.crud.QuerySupport;
 import com.fastaoe.baselibrary.utils.LogUtil;
 
 import java.lang.reflect.Field;
@@ -26,6 +26,8 @@ public class DaoSupport<T> implements IDaoSupport<T> {
 
     private SQLiteDatabase mDatabase;
     private Class<T> mClazz;
+
+    private QuerySupport<T> mQuerySupport;
 
     @Override
     public void init(SQLiteDatabase database, Class<T> clazz) {
@@ -76,24 +78,23 @@ public class DaoSupport<T> implements IDaoSupport<T> {
     }
 
     @Override
-    public List<T> queryAll() {
-//        mDatabase.query()
-        return null;
+    public QuerySupport<T> querySupport() {
+        if (mQuerySupport == null) {
+            mQuerySupport = new QuerySupport<>(mDatabase, mClazz);
+        }
+        return mQuerySupport;
     }
 
     @Override
-    public List<T> query() {
-        return null;
+    public int delete(String whereClause, String[] whereArgs) {
+        return mDatabase.delete(DaoUtil.getTableName(mClazz), whereClause, whereArgs);
     }
 
     @Override
-    public long delete() {
-        return 0;
-    }
-
-    @Override
-    public long update() {
-        return 0;
+    public int update(T o, String whereClause, String... whereArgs) {
+        ContentValues values = getContentValues(o);
+        return mDatabase.update(DaoUtil.getTableName(mClazz),
+                values, whereClause, whereArgs);
     }
 
     private ContentValues getContentValues(T o) {

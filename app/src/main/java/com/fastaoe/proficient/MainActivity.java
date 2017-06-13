@@ -13,22 +13,24 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fastaoe.baselibrary.ioc.Bind;
 import com.fastaoe.baselibrary.ioc.ContentView;
 import com.fastaoe.baselibrary.permission.PermissionFailure;
 import com.fastaoe.baselibrary.permission.PermissionHelper;
 import com.fastaoe.baselibrary.permission.PermissionSuccess;
-import com.fastaoe.baselibrary.utils.LogUtil;
 import com.fastaoe.framelibrary.BaseSkinActivity;
 import com.fastaoe.framelibrary.DefaultNavigationBar;
+import com.fastaoe.proficient.component.recycler.RecyclerFragment;
+import com.fastaoe.proficient.component.views.ViewFragment;
 import com.fastaoe.proficient.weight.indicator.IndicatorAdapter;
 import com.fastaoe.proficient.weight.indicator.TrackIndicatorView;
 
 @ContentView(R.layout.activity_main)
 public class MainActivity extends BaseSkinActivity {
 
-    private String[] items = {"直播", "推荐", "视频", "段友秀", "图片", "段子", "精华", "同城", "游戏"};
+    private String[] items = {"View", "Recycler", "RxJava", "Http", "Other"};
 
     @Bind(R.id.trackView)
     TrackIndicatorView trackView;
@@ -39,7 +41,7 @@ public class MainActivity extends BaseSkinActivity {
     protected void initTitle() {
         new DefaultNavigationBar
                 .Builder(this)
-                .setTitle("title")
+                .setTitle("我的资料站")
                 .setRightText("right")
                 .setRightClickListener(v ->
                         PermissionHelper.with(MainActivity.this)
@@ -65,7 +67,7 @@ public class MainActivity extends BaseSkinActivity {
 
     @PermissionFailure(requestCode = 1)
     private void callFailure() {
-        LogUtil.e("tag", "拒绝call");
+        Toast.makeText(this, "拒绝call", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -118,7 +120,14 @@ public class MainActivity extends BaseSkinActivity {
         viewpager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
             public Fragment getItem(int position) {
-                return TempFragment.newInstance(items[position]);
+                switch (position) {
+                    case 0:
+                        return ViewFragment.newInstance(items[position]);
+                    case 1:
+                        return RecyclerFragment.newInstance(items[position]);
+                    default:
+                        return DefaultFragment.newInstance(items[position]);
+                }
             }
 
             @Override

@@ -1,5 +1,7 @@
 package com.fastaoe.baselibrary.http;
 
+import android.content.Context;
+
 import java.util.Map;
 
 /**
@@ -11,12 +13,12 @@ public interface IHttpEngine {
     /**
      * get
      */
-    void get(String url, Map<String, Object> params, EngineCallback callback);
+    void get(boolean cache, Context context, String url, Map<String, Object> params, EngineCallback callback);
 
     /**
      * post
      */
-    void post(String url, Map<String, Object> params, EngineCallback callback);
+    void post(boolean cache, Context context, String url, Map<String, Object> params, EngineCallback callback);
 
     /**
      * download file

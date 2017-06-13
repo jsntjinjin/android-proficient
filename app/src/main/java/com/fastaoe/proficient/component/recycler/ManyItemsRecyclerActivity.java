@@ -1,4 +1,4 @@
-package com.fastaoe.proficient;
+package com.fastaoe.proficient.component.recycler;
 
 import android.support.v7.widget.GridLayoutManager;
 
@@ -7,12 +7,11 @@ import com.fastaoe.baselibrary.ioc.ContentView;
 import com.fastaoe.baselibrary.utils.LogUtil;
 import com.fastaoe.framelibrary.BaseSkinActivity;
 import com.fastaoe.framelibrary.DefaultNavigationBar;
-import com.fastaoe.proficient.weight.recycler.DefaultLoadCreator;
-import com.fastaoe.proficient.weight.recycler.DefaultRefreshCreator;
+import com.fastaoe.proficient.R;
 import com.fastaoe.proficient.weight.recycler.LinearLayoutItemDecoration;
-import com.fastaoe.proficient.weight.recycler.refresh.LoadRefreshRecyclerView;
 import com.fastaoe.proficient.weight.recycler.base.RecyclerAdapter;
 import com.fastaoe.proficient.weight.recycler.base.ViewHolder;
+import com.fastaoe.proficient.weight.recycler.wrap.WrapRecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,17 +21,17 @@ import java.util.List;
  * description:
  */
 
-@ContentView(R.layout.activity_refresh)
-public class RefreshActivity extends BaseSkinActivity {
+@ContentView(R.layout.activity_recycler_items)
+public class ManyItemsRecyclerActivity extends BaseSkinActivity {
 
-    @Bind(R.id.refresh_view)
-    LoadRefreshRecyclerView refresh_view;
+    @Bind(R.id.recycler_view)
+    WrapRecyclerView recycler_view;
 
     @Override
     protected void initTitle() {
         new DefaultNavigationBar
                 .Builder(this)
-                .setTitle("refresh")
+                .setTitle("自定义多布局recycler")
                 .builder();
     }
 
@@ -44,7 +43,7 @@ public class RefreshActivity extends BaseSkinActivity {
     @Override
     protected void initData() {
         List<ChatItem> list = new ArrayList<>();
-        for (int i = 0; i < 99; i++) {
+        for (int i = 0; i < 100; i++) {
             if (i % 3 == 0) {
                 list.add(new ChatItem("第" + i + "个item", 0));
             } else {
@@ -52,23 +51,10 @@ public class RefreshActivity extends BaseSkinActivity {
             }
         }
 
-        refresh_view.setLayoutManager(new GridLayoutManager(this, 2));
-        refresh_view.setAdapter(initRecyclerAdapter(list));
-        refresh_view.addItemDecoration(new LinearLayoutItemDecoration(this, R.drawable.item_dirver_01));
-        refresh_view.addRefreshViewCreator(new DefaultRefreshCreator());
-        refresh_view.addLoadViewCreator(new DefaultLoadCreator());
+        recycler_view.setLayoutManager(new GridLayoutManager(this, 3));
+        recycler_view.setAdapter(initRecyclerAdapter(list));
+        recycler_view.addItemDecoration(new LinearLayoutItemDecoration(this, R.drawable.item_dirver_01));
 
-        refresh_view.setOnRefreshListener(() -> refresh_view.postDelayed(() -> refresh_view.stopRefresh(), 3000));
-        refresh_view.setOnLoadMoreListener(() -> refresh_view.postDelayed(() -> {
-            for (int i = 100; i < 200; i++) {
-                if (i % 3 == 0) {
-                    list.add(new ChatItem("第" + i + "个item", 0));
-                } else {
-                    list.add(new ChatItem("第" + i + "个item", 1));
-                }
-            }
-            refresh_view.stopLoad();
-        }, 3000));
     }
 
     private RecyclerAdapter initRecyclerAdapter(List<ChatItem> recyclerData) {

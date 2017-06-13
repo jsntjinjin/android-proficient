@@ -25,10 +25,15 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".BannerActivity"/>
-        <activity android:name=".ChatActivity"/>
-        <activity android:name=".RefreshActivity"/>
-        <activity android:name=".RecyclerActivity"/>
+        <!--view-->
+        <activity android:name=".component.views.BannerActivity"/>
+
+        <!--recycler-->
+        <activity android:name=".component.recycler.NormalRecyclerActivity"/>
+        <activity android:name=".component.recycler.ManyItemsRecyclerActivity"/>
+        <activity android:name=".component.recycler.HeadFooterRecyclerActivity"/>
+        <activity android:name=".component.recycler.DragSwipeRecyclerActivity"/>
+        <activity android:name=".component.recycler.RefreshRecyclerActivity"/>
 
         <service android:name=".guardService.MessageService"/>
         <service android:name=".guardService.GuardService"

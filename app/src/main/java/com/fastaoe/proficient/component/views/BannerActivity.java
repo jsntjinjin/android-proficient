@@ -1,4 +1,4 @@
-package com.fastaoe.proficient;
+package com.fastaoe.proficient.component.views;
 
 import android.view.View;
 import android.widget.ImageView;
@@ -7,9 +7,11 @@ import com.fastaoe.baselibrary.ioc.Bind;
 import com.fastaoe.baselibrary.ioc.ContentView;
 import com.fastaoe.baselibrary.utils.LogUtil;
 import com.fastaoe.framelibrary.BaseSkinActivity;
+import com.fastaoe.proficient.R;
 import com.fastaoe.proficient.weight.banner.BannerAdapter;
 import com.fastaoe.proficient.weight.banner.BannerView;
-import com.squareup.picasso.Picasso;
+
+import org.xutils.x;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,8 +60,7 @@ public class BannerActivity extends BaseSkinActivity {
                     banner = (ImageView) convertViews;
                 }
 
-                Picasso.with(BannerActivity.this).load(urls.get(position))
-                        .placeholder(R.mipmap.ic_launcher).into(banner);
+                x.image().bind(banner, urls.get(position));
                 return banner;
             }
 

@@ -1,41 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
+              android:orientation="vertical"
               android:background="#ffffff"
-              android:orientation="vertical">
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/banner"
+        android:id="@+id/recycler_01"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:gravity="center"
-        android:text="banner"/>
+        android:text="普通recyclerview"/>
 
     <TextView
-        android:id="@+id/recycler"
+        android:id="@+id/recycler_02"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:gravity="center"
-        android:text="recycler"/>
-    <TextView
-        android:id="@+id/chat"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:gravity="center"
-        android:text="chat"/>
+        android:text="自定义多布局recycler"/>
 
     <TextView
-        android:id="@+id/refresh"
+        android:id="@+id/recycler_03"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:gravity="center"
-        android:text="refresh"/>
+        android:text="带头部和底部的recycler"/>
 
     <TextView
-        android:id="@+id/touch"
+        android:id="@+id/recycler_04"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:gravity="center"
-        android:text="touch"/>
+        android:text="下拉刷新和上拉加载recycler"/>
+
+    <TextView
+        android:id="@+id/recycler_05"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:text="侧滑删除和item拖动recycler"/>
+
 </LinearLayout>
