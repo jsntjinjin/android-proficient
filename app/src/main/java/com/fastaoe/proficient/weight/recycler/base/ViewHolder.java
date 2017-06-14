@@ -46,12 +46,23 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         return this;
     }
 
-    /**
-     * 设置View的Visibility
-     */
     public ViewHolder setViewVisibility(int viewId, int visibility) {
         getView(viewId).setVisibility(visibility);
         return this;
+    }
+
+    /**
+     * 设置条目点击事件
+     */
+    public void setOnItemClickListener(View.OnClickListener listener) {
+        itemView.setOnClickListener(listener);
+    }
+
+    /**
+     * 设置条目长按事件
+     */
+    public void setOnItemLongClickListener(View.OnLongClickListener listener) {
+        itemView.setOnLongClickListener(listener);
     }
 
     public abstract static class HolderImageLoader {

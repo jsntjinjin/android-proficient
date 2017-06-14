@@ -39,11 +39,21 @@ public class ImageTestActivity extends BaseSkinActivity {
 
     }
 
-    @OnClick(R.id.btn_choose)
-    void choose(Button button) {
+    @OnClick(R.id.btn_choose_many)
+    void chooseMany(Button button) {
         Intent intent = new Intent(this, SelectImageActivity.class);
         intent.putExtra(SelectImageActivity.EXTRA_SELECT_COUNT, 9);
         intent.putExtra(SelectImageActivity.EXTRA_SELECT_MODE, SelectImageActivity.MODE_MULTI);
+        intent.putStringArrayListExtra(SelectImageActivity.EXTRA_DEFAULT_SELECTED_LIST, images);
+        intent.putExtra(SelectImageActivity.EXTRA_SHOW_CAMERA, true);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.btn_choose_one)
+    void chooseOne(Button button) {
+        Intent intent = new Intent(this, SelectImageActivity.class);
+        intent.putExtra(SelectImageActivity.EXTRA_SELECT_COUNT, 1);
+        intent.putExtra(SelectImageActivity.EXTRA_SELECT_MODE, SelectImageActivity.MODE_SINGLE);
         intent.putStringArrayListExtra(SelectImageActivity.EXTRA_DEFAULT_SELECTED_LIST, images);
         intent.putExtra(SelectImageActivity.EXTRA_SHOW_CAMERA, true);
         startActivity(intent);

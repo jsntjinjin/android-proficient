@@ -12,6 +12,7 @@ import com.fastaoe.proficient.weight.recycler.base.ViewHolder;
 import org.xutils.image.ImageOptions;
 import org.xutils.x;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,9 +22,14 @@ import java.util.List;
 
 public class SelectImageListAdapter extends RecyclerAdapter<String> {
 
+    private ArrayList<String> mResultList;
+    private int mMaxCount;
 
-    public SelectImageListAdapter(Context context, List<String> data) {
+
+    public SelectImageListAdapter(Context context, List<String> data, ArrayList<String> resultList, int maxCount) {
         super(context, data, R.layout.item_media_choose);
+        this.mResultList = resultList;
+        this.mMaxCount = maxCount;
     }
 
     @Override
@@ -41,12 +47,44 @@ public class SelectImageListAdapter extends RecyclerAdapter<String> {
 
             // 显示图片利用Glide
             ImageView imageView = holder.getView(R.id.image);
-            //            Glide.with(mContext).load(item)
-            //                    .centerCrop().into(imageView);
             ImageOptions options = new ImageOptions.Builder()
                     .setImageScaleType(ImageView.ScaleType.CENTER)
                     .build();
             x.image().bind(imageView, item, options);
+
+            ImageView selectIndicatorIv = holder.getView(R.id.media_selected_indicator);
+
+            if (mResultList.contains(item)) {
+                selectIndicatorIv.setSelected(true);
+            } else {
+                selectIndicatorIv.setSelected(false);
+            }
+
+            holder.setOnItemClickListener(v -> {
+                if (!mResultList.contains(item)) {
+                    mResultList.add(item);
+                } else {
+                    mResultList.remove(item);
+                }
+
+                notifyDataSetChanged();
+            });
+
+            // 通知显示布局
+            if(mListener != null){
+                mListener.select();
+            }
         }
+    }
+
+    // 设置选择图片监听
+    private SelectImageListener mListener;
+    public void setOnSelectImageListener(SelectImageListener listener){
+        this.mListener = listener;
+    }
+
+    public interface SelectImageListener {
+        // 选择回调
+        void select();
     }
 }

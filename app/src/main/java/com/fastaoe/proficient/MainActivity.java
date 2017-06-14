@@ -22,6 +22,7 @@ import com.fastaoe.baselibrary.permission.PermissionHelper;
 import com.fastaoe.baselibrary.permission.PermissionSuccess;
 import com.fastaoe.framelibrary.BaseSkinActivity;
 import com.fastaoe.framelibrary.DefaultNavigationBar;
+import com.fastaoe.proficient.component.other.OtherFragment;
 import com.fastaoe.proficient.component.recycler.RecyclerFragment;
 import com.fastaoe.proficient.component.views.ViewFragment;
 import com.fastaoe.proficient.weight.indicator.IndicatorAdapter;
@@ -46,7 +47,7 @@ public class MainActivity extends BaseSkinActivity {
                 .setRightText("right")
                 .setRightClickListener(v ->
                         PermissionHelper.with(MainActivity.this)
-                                .requestCode(1)
+                                .requestCode(Constants.PERMISSION_CALL_PHONE)
                                 .permissions(Manifest.permission.CALL_PHONE)
                                 .request())
                 .builder();
@@ -58,7 +59,7 @@ public class MainActivity extends BaseSkinActivity {
         PermissionHelper.onRequestPermissionsResult(this, requestCode, permissions);
     }
 
-    @PermissionSuccess(requestCode = 1)
+    @PermissionSuccess(requestCode = Constants.PERMISSION_CALL_PHONE)
     private void callSuccess() {
         Intent intent = new Intent();
         Uri parse = Uri.parse("tel:" + "15862932131");
@@ -66,7 +67,7 @@ public class MainActivity extends BaseSkinActivity {
         startActivity(intent);
     }
 
-    @PermissionFailure(requestCode = 1)
+    @PermissionFailure(requestCode = Constants.PERMISSION_CALL_PHONE)
     private void callFailure() {
         Toast.makeText(this, "拒绝call", Toast.LENGTH_SHORT).show();
     }
@@ -126,6 +127,8 @@ public class MainActivity extends BaseSkinActivity {
                         return ViewFragment.newInstance(items[position]);
                     case 1:
                         return RecyclerFragment.newInstance(items[position]);
+                    case 4:
+                        return OtherFragment.newInstance(items[position]);
                     default:
                         return DefaultFragment.newInstance(items[position]);
                 }

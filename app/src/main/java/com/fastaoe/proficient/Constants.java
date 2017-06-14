@@ -33,4 +33,8 @@ public class Constants {
     public static final String ICON_BENING = "&#xe60c;";
     public static final String ICON_GONE = "";
 
+    // permission code
+    public static final int PERMISSION_CALL_PHONE = 1;
+    public static final int PERMISSION_EXTERNAL_STORAGE = 2;
+    public static final int PERMISSION_CAMERA = 3;
 }
