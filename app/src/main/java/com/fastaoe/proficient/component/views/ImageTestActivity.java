@@ -1,13 +1,23 @@
 package com.fastaoe.proficient.component.views;
 
+import android.Manifest;
 import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.util.Log;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.fastaoe.baselibrary.ioc.ContentView;
 import com.fastaoe.baselibrary.ioc.OnClick;
+import com.fastaoe.baselibrary.permission.PermissionFailure;
+import com.fastaoe.baselibrary.permission.PermissionHelper;
+import com.fastaoe.baselibrary.permission.PermissionSuccess;
 import com.fastaoe.framelibrary.BaseSkinActivity;
 import com.fastaoe.framelibrary.DefaultNavigationBar;
+import com.fastaoe.proficient.Constants;
 import com.fastaoe.proficient.R;
+import com.fastaoe.proficient.component.views.selectimage.ImageSelector;
+import com.fastaoe.proficient.component.views.selectimage.SelectImageActivity;
 
 import java.util.ArrayList;
 
@@ -20,6 +30,10 @@ import java.util.ArrayList;
 public class ImageTestActivity extends BaseSkinActivity {
 
     private ArrayList<String> images = new ArrayList<>();
+
+    private final int SELECT_IMAGE_REQUEST = 0x0011;
+
+    private boolean isSingle = false;
 
     @Override
     protected void initTitle() {
@@ -41,21 +55,55 @@ public class ImageTestActivity extends BaseSkinActivity {
 
     @OnClick(R.id.btn_choose_many)
     void chooseMany(Button button) {
-        Intent intent = new Intent(this, SelectImageActivity.class);
-        intent.putExtra(SelectImageActivity.EXTRA_SELECT_COUNT, 9);
-        intent.putExtra(SelectImageActivity.EXTRA_SELECT_MODE, SelectImageActivity.MODE_MULTI);
-        intent.putStringArrayListExtra(SelectImageActivity.EXTRA_DEFAULT_SELECTED_LIST, images);
-        intent.putExtra(SelectImageActivity.EXTRA_SHOW_CAMERA, true);
-        startActivity(intent);
+        isSingle = false;
+
+        PermissionHelper.with(this)
+                .requestCode(Constants.PERMISSION_CAMERA)
+                .permissions(Manifest.permission.CAMERA)
+                .request();
     }
 
     @OnClick(R.id.btn_choose_one)
     void chooseOne(Button button) {
-        Intent intent = new Intent(this, SelectImageActivity.class);
-        intent.putExtra(SelectImageActivity.EXTRA_SELECT_COUNT, 1);
-        intent.putExtra(SelectImageActivity.EXTRA_SELECT_MODE, SelectImageActivity.MODE_SINGLE);
-        intent.putStringArrayListExtra(SelectImageActivity.EXTRA_DEFAULT_SELECTED_LIST, images);
-        intent.putExtra(SelectImageActivity.EXTRA_SHOW_CAMERA, true);
-        startActivity(intent);
+        isSingle = true;
+
+        PermissionHelper.with(this)
+                .requestCode(Constants.PERMISSION_CAMERA)
+                .permissions(Manifest.permission.CAMERA)
+                .request();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        PermissionHelper.onRequestPermissionsResult(this, requestCode, permissions);
+    }
+
+    @PermissionSuccess(requestCode = Constants.PERMISSION_CAMERA)
+    private void callSuccess() {
+        if (isSingle) {
+            ImageSelector.create().single().origin(images)
+                    .showCamera(true).start(this, SELECT_IMAGE_REQUEST);
+        } else {
+            ImageSelector.create().count(9).multi().origin(images)
+                    .showCamera(true).start(this, SELECT_IMAGE_REQUEST);
+        }
+    }
+
+    @PermissionFailure(requestCode = Constants.PERMISSION_CAMERA)
+    private void callFailure() {
+        Toast.makeText(this, "拒绝了相机权限，请到设置中打开！", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == SELECT_IMAGE_REQUEST && data != null) {
+                images = data.getStringArrayListExtra(SelectImageActivity.EXTRA_RESULT);
+                // 做一下显示
+                Log.e("TAG", images.toString());
+            }
+        }
     }
 }

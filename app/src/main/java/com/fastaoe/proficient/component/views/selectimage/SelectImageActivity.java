@@ -1,4 +1,4 @@
-package com.fastaoe.proficient.component.views;
+package com.fastaoe.proficient.component.views.selectimage;
 
 import android.Manifest;
 import android.app.LoaderManager;
@@ -6,7 +6,6 @@ import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.widget.GridLayoutManager;
@@ -16,21 +15,17 @@ import android.widget.Toast;
 
 import com.fastaoe.baselibrary.ioc.Bind;
 import com.fastaoe.baselibrary.ioc.ContentView;
+import com.fastaoe.baselibrary.ioc.OnClick;
 import com.fastaoe.baselibrary.permission.PermissionFailure;
 import com.fastaoe.baselibrary.permission.PermissionHelper;
 import com.fastaoe.baselibrary.permission.PermissionSuccess;
-import com.fastaoe.baselibrary.utils.LogUtil;
+import com.fastaoe.baselibrary.utils.StatusBarUtil;
 import com.fastaoe.framelibrary.BaseSkinActivity;
 import com.fastaoe.framelibrary.DefaultNavigationBar;
 import com.fastaoe.proficient.Constants;
-import com.fastaoe.proficient.MainActivity;
 import com.fastaoe.proficient.R;
-import com.fastaoe.proficient.component.views.adapter.SelectImageListAdapter;
-import com.fastaoe.proficient.weight.recycler.base.ItemClickListener;
 
 import java.util.ArrayList;
-
-import static com.fastaoe.proficient.R.id.select_num;
 
 /**
  * Created by jinjin on 17/6/13.
@@ -79,6 +74,8 @@ public class SelectImageActivity extends BaseSkinActivity {
                 .Builder(this)
                 .setTitle("图片选择器")
                 .builder();
+
+        StatusBarUtil.statusBarTintColor(this, getResources().getColor(R.color.media_choose_op_btn_enabled));
     }
 
     @Override
@@ -115,6 +112,29 @@ public class SelectImageActivity extends BaseSkinActivity {
         Toast.makeText(this, "拒绝 -> READ_EXTERNAL_STORAGE", Toast.LENGTH_SHORT).show();
     }
 
+    @OnClick(R.id.select_finish)
+    private void sureSelect() {
+        // 选择好的图片传过去
+        Intent intent = new Intent();
+        intent.putStringArrayListExtra(EXTRA_RESULT,mResultList);
+        setResult(RESULT_OK, intent);
+        // 关闭当前页面
+        finish();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // 1.第一个要把图片加到集合
+
+        // 2.调用sureSelect()方法
+
+
+        // 3.通知系统本地有图片改变，下次进来可以找到这张图片
+        // notify system the image has change
+        // sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(mTempFile));
+    }
 
     private void initImageList() {
         // ContentProvider获取图片

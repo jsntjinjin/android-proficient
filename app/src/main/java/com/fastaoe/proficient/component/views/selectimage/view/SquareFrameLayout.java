@@ -1,4 +1,4 @@
-package com.fastaoe.proficient.weight;
+package com.fastaoe.proficient.component.views.selectimage.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
