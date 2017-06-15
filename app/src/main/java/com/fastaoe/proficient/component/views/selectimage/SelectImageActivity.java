@@ -113,7 +113,7 @@ public class SelectImageActivity extends BaseSkinActivity {
     }
 
     @OnClick(R.id.select_finish)
-    private void sureSelect() {
+    private void sureSelect(TextView textView) {
         // 选择好的图片传过去
         Intent intent = new Intent();
         intent.putStringArrayListExtra(EXTRA_RESULT,mResultList);
