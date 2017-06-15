@@ -13,9 +13,6 @@ import com.fastaoe.proficient.weight.recycler.base.RecyclerAdapter;
 import com.fastaoe.proficient.weight.recycler.base.ViewHolder;
 import com.squareup.picasso.Picasso;
 
-import org.xutils.image.ImageOptions;
-import org.xutils.x;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
