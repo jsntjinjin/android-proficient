@@ -12,4 +12,18 @@
         android:gravity="center"
         android:text="二维码"/>
 
+    <TextView
+        android:id="@+id/skin"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:text="换肤"/>
+
+    <TextView
+        android:id="@+id/hook"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:text="插件化"/>
+
 </LinearLayout>

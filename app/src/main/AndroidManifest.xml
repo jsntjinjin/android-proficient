@@ -48,6 +48,7 @@
 
         <!--other-->
         <activity android:name=".component.other.ZXingActivity"/>
+        <activity android:name=".component.other.hook.ProxyActivity"/>
 
         <!--zxing-->
         <activity

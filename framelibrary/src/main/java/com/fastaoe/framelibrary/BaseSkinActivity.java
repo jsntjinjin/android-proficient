@@ -36,8 +36,8 @@ public abstract class BaseSkinActivity extends BaseActivity implements LayoutInf
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        LayoutInflater layoutInflater = LayoutInflater.from(this);
-        LayoutInflaterCompat.setFactory(layoutInflater, this);
+//        LayoutInflater layoutInflater = LayoutInflater.from(this);
+//        LayoutInflaterCompat.setFactory(layoutInflater, this);
         super.onCreate(savedInstanceState);
     }
 
