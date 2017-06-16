@@ -24,6 +24,29 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
         sourceCompatibility JavaVersion.VERSION_1_8
     }
+    sourceSets {
+        main {
+            jni.srcDirs = []//设置禁止gradle生成Android.mk
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
+    task ndkBuild(type: Exec) {//设置新的so的生成目录
+        commandLine "/Users/jinjin/soft/android/sdk/ndk-bundle/ndk-build",
+                'NDK_PROJECT_PATH=build/intermediates/ndk',
+                'NDK_LIBS_OUT=libs',
+                'APP_BUILD_SCRIPT=jni/Android.mk',
+                'NDK_APPLICATION_MK=jni/Application.mk'
+    }
+
+    tasks.withType(JavaCompile) {
+        compileTask -> compileTask.dependsOn ndkBuild
+    }
+    externalNativeBuild {
+        ndkBuild {
+            path 'jni/Android.mk'
+        }
+    }
 }
 
 dependencies {
