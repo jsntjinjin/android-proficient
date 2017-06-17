@@ -9,6 +9,9 @@ import com.fastaoe.baselibrary.ioc.ContentView;
 import com.fastaoe.baselibrary.ioc.OnClick;
 import com.fastaoe.proficient.R;
 import com.fastaoe.proficient.component.other.hook.TestHookActivity;
+import com.fastaoe.proficient.component.other.notification.NotificationResultActivity;
+import com.fastaoe.proficient.weight.notification.Notify;
+import com.fastaoe.proficient.weight.notification.NotifyProxy;
 
 /**
  * Created by jinjin on 17/6/14.
@@ -51,5 +54,9 @@ public class OtherFragment extends BaseFragment {
         startActivity(new Intent(getActivity(), TestHookActivity.class));
     }
 
+    @OnClick(R.id.notification)
+    void notificationClick(TextView tv) {
+        new NotifyProxy(getActivity(), NotificationResultActivity.class).send();
+    }
 
 }
