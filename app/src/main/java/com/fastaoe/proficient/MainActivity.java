@@ -145,24 +145,4 @@ public class MainActivity extends BaseSkinActivity {
     protected void initData() {
 
     }
-
-    //    @OnItemClick(R.id.main_listview)
-    //    @CheckNet
-    //    private void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-    //        Toast.makeText(this, id + "", Toast.LENGTH_LONG).show();
-    //    }
-    //    @OnClick({R.id.main_tv1, R.id.main_tv2})
-    //    private void onClick(TextView v) {
-    //        AlertDialog dialog = new AlertDialog.Builder(this)
-    //                .setContentView(R.layout.main_fragment)
-    //                .setText(R.id.main_tv2, "赵六")
-    //                .fullWidth()
-    //                .fromBottom(true)
-    //                .setOnCancelListener(dialog1 -> {
-    //                    Toast.makeText(this, "xixixixi", Toast.LENGTH_LONG).show();
-    //                })
-    //                .show();
-    //        dialog.setOnClickListener(R.id.main_tv2,
-    //                v1 -> Toast.makeText(this, "哈哈哈哈", Toast.LENGTH_LONG).show());
-    //    }
 }
