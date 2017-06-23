@@ -118,6 +118,7 @@ public class DefaultNavigationBar extends AbsNavigationBar<DefaultNavigationBar.
         public Builder hideLeftText() {
             P.mLeftText = null;
             P.mLeftTextIcon = null;
+            P.mLeftListener = null;
             return this;
         }
 

@@ -23,4 +23,12 @@
         <attr name="bvWidthProportion" format="float"/>
         <attr name="bvHeightProportion" format="float"/>
     </declare-styleable>
+
+    <declare-styleable name="StepView">
+        <attr name="outColor" format="reference|color"/>
+        <attr name="innerColor" format="color|reference"/>
+        <attr name="borderWidth" format="dimension"/>
+        <attr name="stepTextColor" format="color|reference"/>
+        <attr name="stepTextSize" format="dimension"/>
+    </declare-styleable>
 </resources>

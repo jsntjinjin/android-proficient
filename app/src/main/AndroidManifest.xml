@@ -38,6 +38,7 @@
         <activity android:name=".component.views.DialogViewActivity"/>
         <activity android:name=".component.views.selectimage.SelectImageActivity"/>
         <activity android:name=".component.views.ImageTestActivity"/>
+        <activity android:name=".component.views.StepViewActivity"/>
 
         <!--recycler-->
         <activity android:name=".component.recycler.NormalRecyclerActivity"/>

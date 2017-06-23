@@ -23,12 +23,27 @@ public class DensityUtil {
         return density;
     }
 
+    public static float getFontScaledDensity(Context context) {
+        if (density <= 0F) {
+            density = context.getResources().getDisplayMetrics().scaledDensity;
+        }
+        return density;
+    }
+
     public static int dip2px(Context context, float dpValue) {
         return (int) (dpValue * getDensity(context) + 0.5F);
     }
 
     public static int px2dip(Context context, float pxValue) {
         return (int) (pxValue / getDensity(context) + 0.5F);
+    }
+
+    public static int px2sp(Context context, float pxValue) {
+        return (int) (pxValue / getFontScaledDensity(context) + 0.5F);
+    }
+
+    public static int sp2px(Context context, float pxValue) {
+        return (int) (pxValue / getFontScaledDensity(context) + 0.5F);
     }
 
     public static int getScreenWidth(Context context) {

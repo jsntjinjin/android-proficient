@@ -52,4 +52,10 @@ public class ViewFragment extends BaseFragment {
         startActivity(intent);
     }
 
+    @OnClick(R.id.run_num)
+    void runNumClick(TextView tv) {
+        Intent intent = new Intent(getActivity(), StepViewActivity.class);
+        startActivity(intent);
+    }
+
 }
