@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <com.fastaoe.proficient.component.views.weight.RoundProgressBar
+        android:id="@+id/rpb_round"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:paddingBottom="20dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="20dp"
+        app:innerBackground="#008888"
+        app:outerBackground="#ff8800"
+        app:progressTextColor="#666666"
+        app:progressTextSize="16sp"
+        app:roundWidth="10dp"/>
+
+    <com.fastaoe.proficient.component.views.weight.ShapeLoadingView
+        android:id="@+id/slv_loading"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="100dp"/>
+    
+    <Button
+        android:id="@+id/btn_start"
+        android:layout_width="100dp"
+        android:text="启动"
+        android:layout_marginTop="40dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="40dp"/>
+
+</LinearLayout>

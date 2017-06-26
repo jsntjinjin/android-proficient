@@ -1,21 +1,20 @@
-package com.fastaoe.proficient.weight;
+package com.fastaoe.proficient.component.views.weight;
 
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
 
-
 import com.fastaoe.proficient.R;
 
-import static com.fastaoe.proficient.weight.ColorTrackTextView.Direction.LEFT_TO_RIGHT;
-
 /**
- * Created by jinjin on 2017/6/8.
+ * Created by jinjin on 17/6/26.
+ * description:
  */
 
 public class ColorTrackTextView extends AppCompatTextView {
@@ -23,11 +22,9 @@ public class ColorTrackTextView extends AppCompatTextView {
     private Paint mOriginPaint;
     private Paint mChangePaint;
 
-    // 变色进度
-    private float mProgress = 0.0f;
+    private float progress = 0.0f;
 
     private Direction mDirection = Direction.LEFT_TO_RIGHT;
-
     public enum Direction {
         LEFT_TO_RIGHT, RIGHT_TO_LEFT
     }
@@ -44,41 +41,34 @@ public class ColorTrackTextView extends AppCompatTextView {
         super(context, attrs, defStyleAttr);
 
         initPaint(context, attrs);
-
     }
 
     private void initPaint(Context context, AttributeSet attrs) {
-        TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.ColorTrackTextView);
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ColorTrackTextView);
 
-        int originColor = array.getColor(R.styleable.ColorTrackTextView_originColor, getTextColors().getDefaultColor());
-        int changeColor = array.getColor(R.styleable.ColorTrackTextView_changeColor, getTextColors().getDefaultColor());
+        int originColor = typedArray.getColor(R.styleable.ColorTrackTextView_originColor, getTextColors().getDefaultColor());
+        int changeColor = typedArray.getColor(R.styleable.ColorTrackTextView_changeColor, Color.RED);
 
-        mOriginPaint = getPaintByColor(originColor);
-        mChangePaint = getPaintByColor(changeColor);
+        mOriginPaint = setPaintByColor(originColor);
+        mChangePaint = setPaintByColor(changeColor);
 
-        array.recycle();
-
+        typedArray.recycle();
     }
 
-    private Paint getPaintByColor(int color) {
+    private Paint setPaintByColor(int color) {
         Paint paint = new Paint();
-        // 颜色
-        paint.setColor(color);
-        // 抗锯齿
         paint.setAntiAlias(true);
-        // 防抖动
         paint.setDither(true);
         paint.setTextSize(getTextSize());
+        paint.setColor(color);
         return paint;
     }
 
-    // 一个颜色两种颜色
     @Override
     protected void onDraw(Canvas canvas) {
-        // 通过进度将变色的位置计算出来
-        float middle = mProgress * getWidth();
+        int middle = (int) (progress * getWidth());
 
-        if (mDirection == LEFT_TO_RIGHT) {
+        if (mDirection == Direction.LEFT_TO_RIGHT) {
             drawText(canvas, mChangePaint, 0, middle);
             drawText(canvas, mOriginPaint, middle, getWidth());
         } else {
@@ -88,16 +78,16 @@ public class ColorTrackTextView extends AppCompatTextView {
 
     }
 
-    private void drawText(Canvas canvas, Paint paint, float start, float end) {
+    private void drawText(Canvas canvas, Paint paint, int start, int end) {
         canvas.save();
-        // 获取字体的宽度
         String text = getText().toString();
+        // 获取字体宽度
         Rect bounds = new Rect();
         paint.getTextBounds(text, 0, text.length(), bounds);
         int x = getWidth() / 2 - bounds.width() / 2;
-        // 基线
-        Paint.FontMetricsInt fontMetricsInt = paint.getFontMetricsInt();
-        int dy = (fontMetricsInt.bottom - fontMetricsInt.top) / 2 - fontMetricsInt.bottom;
+        // 获取baseLine
+        Paint.FontMetricsInt fontMetrics = paint.getFontMetricsInt();
+        int dy = (fontMetrics.bottom - fontMetrics.top) / 2 - fontMetrics.bottom;
         int baseLine = getHeight() / 2 + dy;
 
         canvas.clipRect(start, 0, end, getHeight());
@@ -106,11 +96,19 @@ public class ColorTrackTextView extends AppCompatTextView {
     }
 
     public void setProgress(float progress) {
-        this.mProgress = progress;
+        this.progress = progress;
         invalidate();
     }
 
     public void setDirection(Direction direction) {
         this.mDirection = direction;
+    }
+
+    public void setOriginColor(int color) {
+        mOriginPaint.setColor(color);
+    }
+
+    public void setChangeColor(int color) {
+        mChangePaint.setColor(color);
     }
 }

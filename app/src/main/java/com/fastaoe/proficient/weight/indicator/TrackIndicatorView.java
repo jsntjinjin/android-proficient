@@ -160,7 +160,7 @@ public class TrackIndicatorView extends HorizontalScrollView implements ViewPage
         // 当前滑动的位置
         float totalWidth = (position + positionOffset) * mItemWidth;
         // 当前中间tab文字的左边偏移量
-        float offsetScroll = (getWidth()     - mItemWidth) / 2;
+        float offsetScroll = (getWidth() - mItemWidth) / 2;
         int finalScroll = (int) (totalWidth - offsetScroll);
         // 滚动
         scrollTo(finalScroll, 0);

@@ -9,6 +9,7 @@ import com.fastaoe.baselibrary.base.BaseFragment;
 import com.fastaoe.baselibrary.ioc.ContentView;
 import com.fastaoe.baselibrary.ioc.OnClick;
 import com.fastaoe.proficient.R;
+import com.fastaoe.proficient.component.views.weight.RoundProgressBar;
 
 /**
  * Created by jinjin on 17/5/14.
@@ -55,6 +56,12 @@ public class ViewFragment extends BaseFragment {
     @OnClick(R.id.run_num)
     void runNumClick(TextView tv) {
         Intent intent = new Intent(getActivity(), StepViewActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.progress_bar)
+    void progressBarClick(TextView tv) {
+        Intent intent = new Intent(getActivity(), ProgressBarActivity.class);
         startActivity(intent);
     }
 

@@ -39,6 +39,7 @@
         <activity android:name=".component.views.selectimage.SelectImageActivity"/>
         <activity android:name=".component.views.ImageTestActivity"/>
         <activity android:name=".component.views.StepViewActivity"/>
+        <activity android:name=".component.views.ProgressBarActivity"/>
 
         <!--recycler-->
         <activity android:name=".component.recycler.NormalRecyclerActivity"/>
