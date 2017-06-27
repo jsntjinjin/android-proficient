@@ -44,6 +44,20 @@
             android:gravity="center"
             android:text="进度条"/>
 
+        <TextView
+            android:id="@+id/rating_bar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="评分控件"/>
+
+        <TextView
+            android:id="@+id/letter_side_bar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="字母索引列表"/>
+
     </LinearLayout>
 </ScrollView>
 

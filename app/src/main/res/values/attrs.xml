@@ -39,4 +39,16 @@
         <attr name="progressTextSize" format="dimension"/>
         <attr name="progressTextColor" format="color"/>
     </declare-styleable>
+    
+    <declare-styleable name="RatingBarView">
+        <attr name="maxRating" format="integer"/>
+        <attr name="normalStar" format="reference"/>
+        <attr name="focusStar" format="reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="LetterSideBar">
+        <attr name="lsTextSize" format="dimension"/>
+        <attr name="lsTextColorNormal" format="color"/>
+        <attr name="lsTextColorFocus" format="color"/>
+    </declare-styleable>
 </resources>

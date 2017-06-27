@@ -11,19 +11,19 @@
     <uses-permission android:name="android.permission.CALL_PHONE"/>
 
     <!--zxing-->
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.FLASHLIGHT" />
-    <uses-feature android:name="android.hardware.camera" />
-    <uses-feature android:name="android.hardware.camera.autofocus" />
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.FLASHLIGHT"/>
+    <uses-feature android:name="android.hardware.camera"/>
+    <uses-feature android:name="android.hardware.camera.autofocus"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
 
     <application
+        android:name=".MyBaseApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:name=".MyBaseApplication"
         android:theme="@style/AppTheme">
 
         <activity android:name=".MainActivity">
@@ -40,6 +40,8 @@
         <activity android:name=".component.views.ImageTestActivity"/>
         <activity android:name=".component.views.StepViewActivity"/>
         <activity android:name=".component.views.ProgressBarActivity"/>
+        <activity android:name=".component.views.RatingBarActivity"/>
+        <activity android:name=".component.views.LetterSideBarActivity"/>
 
         <!--recycler-->
         <activity android:name=".component.recycler.NormalRecyclerActivity"/>
@@ -57,11 +59,11 @@
         <activity
             android:name=".component.other.zxing.activity.CaptureActivity"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Black.NoTitleBar" />
+            android:theme="@android:style/Theme.Black.NoTitleBar"/>
         <activity
             android:name=".component.other.zxing.activity.ResultActivity"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Black.NoTitleBar" />
+            android:theme="@android:style/Theme.Black.NoTitleBar"/>
 
         <service android:name=".guardService.MessageService"/>
         <service android:name=".guardService.GuardService"

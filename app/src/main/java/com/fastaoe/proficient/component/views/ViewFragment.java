@@ -65,4 +65,15 @@ public class ViewFragment extends BaseFragment {
         startActivity(intent);
     }
 
+    @OnClick(R.id.rating_bar)
+    void ratingBarClick(TextView tv) {
+        Intent intent = new Intent(getActivity(), RatingBarActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.letter_side_bar)
+    void letterSideBarClick(TextView tv) {
+        Intent intent = new Intent(getActivity(), LetterSideBarActivity.class);
+        startActivity(intent);
+    }
 }
