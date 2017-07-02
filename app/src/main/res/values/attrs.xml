@@ -51,4 +51,8 @@
         <attr name="lsTextColorNormal" format="color"/>
         <attr name="lsTextColorFocus" format="color"/>
     </declare-styleable>
+
+    <declare-styleable name="KGSlidingMenu">
+        <attr name="slidingRightMargin" format="dimension"/>
+    </declare-styleable>
 </resources>

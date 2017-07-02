@@ -42,6 +42,7 @@
         <activity android:name=".component.views.ProgressBarActivity"/>
         <activity android:name=".component.views.RatingBarActivity"/>
         <activity android:name=".component.views.LetterSideBarActivity"/>
+        <activity android:name=".component.views.KGSlidingMenuActivity"/>
 
         <!--recycler-->
         <activity android:name=".component.recycler.NormalRecyclerActivity"/>
