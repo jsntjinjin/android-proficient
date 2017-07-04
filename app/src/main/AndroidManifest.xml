@@ -43,6 +43,7 @@
         <activity android:name=".component.views.RatingBarActivity"/>
         <activity android:name=".component.views.LetterSideBarActivity"/>
         <activity android:name=".component.views.KGSlidingMenuActivity"/>
+        <activity android:name=".component.views.QQSlidingMenuActivity"/>
 
         <!--recycler-->
         <activity android:name=".component.recycler.NormalRecyclerActivity"/>

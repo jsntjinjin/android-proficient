@@ -35,6 +35,12 @@ public class ViewFragment extends BaseFragment {
         Bundle bundle = getArguments();
     }
 
+    @OnClick(R.id.sliding_menu_qq)
+    void QQSlidingMenu(TextView tv) {
+        Intent intent = new Intent(getActivity(), QQSlidingMenuActivity.class);
+        startActivity(intent);
+    }
+
     @OnClick(R.id.sliding_menu_kg)
     void KGSlidingMenu(TextView tv) {
         Intent intent = new Intent(getActivity(), KGSlidingMenuActivity.class);

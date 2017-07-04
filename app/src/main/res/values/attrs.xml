@@ -55,4 +55,7 @@
     <declare-styleable name="KGSlidingMenu">
         <attr name="slidingRightMargin" format="dimension"/>
     </declare-styleable>
+    <declare-styleable name="QQSlidingMenu">
+        <attr name="slidingQQRightMargin" format="dimension"/>
+    </declare-styleable>
 </resources>
