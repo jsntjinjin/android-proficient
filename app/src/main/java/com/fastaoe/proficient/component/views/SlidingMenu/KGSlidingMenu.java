@@ -24,6 +24,7 @@ public class KGSlidingMenu extends HorizontalScrollView {
     private View contentView;
 
     private boolean isMenuOpen = false;
+    private boolean isIntercept = false;
     private GestureDetector gestureDetector;
 
     public KGSlidingMenu(Context context) {
@@ -78,10 +79,37 @@ public class KGSlidingMenu extends HorizontalScrollView {
         scrollTo(mMenuWidth, 0);
     }
 
+//    @Override
+//    public boolean onInterceptTouchEvent(MotionEvent ev) {
+//        float x = ev.getX();
+//        if (x > mMenuWidth) {
+//            // 打开的情况
+//            isIntercept = true;
+//            return true;
+//        }
+//        return super.onInterceptTouchEvent(ev);
+//    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        float x = ev.getX();
+        if (isMenuOpen && ev.getAction() == MotionEvent.ACTION_UP && x > mMenuWidth) {
+            // 打开的情况
+            closeMenu();
+            return false;
+        }
+        return super.dispatchTouchEvent(ev);
+    }
+
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
+        if (isIntercept) {
+            closeMenu();
+
+            return true;
+        }
         if (gestureDetector.onTouchEvent(ev)) {
-            return gestureDetector.onTouchEvent(ev);
+            return true;
         }
 
         if (ev.getAction() == MotionEvent.ACTION_UP) {

@@ -2,7 +2,7 @@
 <com.fastaoe.proficient.component.views.SlidingMenu.KGSlidingMenu
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:slidingRightMargin="60dp"
+    app:slidingRightMargin="100dp"
     android:overScrollMode="never"
     android:id="@+id/kg_slding_menu"
     android:layout_width="match_parent"
