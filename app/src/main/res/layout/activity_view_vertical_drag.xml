@@ -12,11 +12,9 @@
         android:background="#0000ff"
         android:text="后排列表"/>
 
-    <TextView
+    <com.fastaoe.proficient.weight.recycler.wrap.WrapRecyclerView
+        android:id="@+id/wrcv"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:gravity="center"
-        android:background="#ff0000"
-        android:text="前排列表"/>
+        android:layout_height="match_parent"/>
 
 </com.fastaoe.proficient.component.views.weight.VerticalDragView>

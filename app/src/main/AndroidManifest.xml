@@ -44,6 +44,7 @@
         <activity android:name=".component.views.LetterSideBarActivity"/>
         <activity android:name=".component.views.KGSlidingMenuActivity"/>
         <activity android:name=".component.views.QQSlidingMenuActivity"/>
+        <activity android:name=".component.views.VerticalDragActivity"/>
 
         <!--recycler-->
         <activity android:name=".component.recycler.NormalRecyclerActivity"/>

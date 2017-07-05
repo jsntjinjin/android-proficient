@@ -10,6 +10,13 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/sliding_vertical_drag"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="垂直顺滑菜单"/>
+
+        <TextView
             android:id="@+id/sliding_menu_qq"
             android:layout_width="match_parent"
             android:layout_height="50dp"
