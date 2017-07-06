@@ -10,6 +10,13 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/lock_pattern"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="九宫格锁屏"/>
+
+        <TextView
             android:id="@+id/sliding_vertical_drag"
             android:layout_width="match_parent"
             android:layout_height="50dp"

@@ -6,15 +6,17 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <!--jobService权限-->
+    <!-- jobService权限 -->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <uses-permission android:name="android.permission.CALL_PHONE"/>
 
-    <!--zxing-->
+    <!-- zxing -->
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.FLASHLIGHT"/>
+
     <uses-feature android:name="android.hardware.camera"/>
     <uses-feature android:name="android.hardware.camera.autofocus"/>
+
     <uses-permission android:name="android.permission.VIBRATE"/>
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
 
@@ -25,15 +27,15 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
+
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
 
-        <!--view-->
+        <!-- view -->
         <activity android:name=".component.views.BannerViewActivity"/>
         <activity android:name=".component.views.DialogViewActivity"/>
         <activity android:name=".component.views.selectimage.SelectImageActivity"/>
@@ -45,20 +47,21 @@
         <activity android:name=".component.views.KGSlidingMenuActivity"/>
         <activity android:name=".component.views.QQSlidingMenuActivity"/>
         <activity android:name=".component.views.VerticalDragActivity"/>
+        <activity android:name=".component.views.LockPatternActivity"/>
 
-        <!--recycler-->
+        <!-- recycler -->
         <activity android:name=".component.recycler.NormalRecyclerActivity"/>
         <activity android:name=".component.recycler.ManyItemsRecyclerActivity"/>
         <activity android:name=".component.recycler.HeadFooterRecyclerActivity"/>
         <activity android:name=".component.recycler.DragSwipeRecyclerActivity"/>
         <activity android:name=".component.recycler.RefreshRecyclerActivity"/>
 
-        <!--other-->
+        <!-- other -->
         <activity android:name=".component.other.ZXingActivity"/>
         <activity android:name=".component.other.hook.ProxyActivity"/>
         <activity android:name=".component.other.notification.NotificationResultActivity"/>
 
-        <!--zxing-->
+        <!-- zxing -->
         <activity
             android:name=".component.other.zxing.activity.CaptureActivity"
             android:screenOrientation="portrait"
@@ -69,12 +72,13 @@
             android:theme="@android:style/Theme.Black.NoTitleBar"/>
 
         <service android:name=".guardService.MessageService"/>
-        <service android:name=".guardService.GuardService"
-                 android:process=":guardService"/>
-        <service android:name=".guardService.JobWakeUpService"
-                 android:enabled="true"
-                 android:permission="android.permission.BIND_JOB_SERVICE"/>
-
+        <service
+            android:name=".guardService.GuardService"
+            android:process=":guardService"/>
+        <service
+            android:name=".guardService.JobWakeUpService"
+            android:enabled="true"
+            android:permission="android.permission.BIND_JOB_SERVICE"/>
     </application>
 
 </manifest>

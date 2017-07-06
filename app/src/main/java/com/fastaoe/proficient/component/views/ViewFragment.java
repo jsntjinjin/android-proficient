@@ -35,6 +35,12 @@ public class ViewFragment extends BaseFragment {
         Bundle bundle = getArguments();
     }
 
+    @OnClick(R.id.lock_pattern)
+    void lockPattern(TextView tv) {
+        Intent intent = new Intent(getActivity(), LockPatternActivity.class);
+        startActivity(intent);
+    }
+
     @OnClick(R.id.sliding_vertical_drag)
     void verticalDrag(TextView tv) {
         Intent intent = new Intent(getActivity(), VerticalDragActivity.class);
