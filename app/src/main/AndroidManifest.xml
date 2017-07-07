@@ -20,6 +20,9 @@
     <uses-permission android:name="android.permission.VIBRATE"/>
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
 
+    <!--OpenGl ES 2.0-->
+    <uses-feature android:glEsVersion="0x00020000" android:required="true" />
+
     <application
         android:name=".MyBaseApplication"
         android:allowBackup="true"
@@ -55,6 +58,9 @@
         <activity android:name=".component.recycler.HeadFooterRecyclerActivity"/>
         <activity android:name=".component.recycler.DragSwipeRecyclerActivity"/>
         <activity android:name=".component.recycler.RefreshRecyclerActivity"/>
+
+        <!--OpenGL-->
+        <activity android:name=".component.opengles.render.FGLViewActivity"/>
 
         <!-- other -->
         <activity android:name=".component.other.ZXingActivity"/>

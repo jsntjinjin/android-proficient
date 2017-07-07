@@ -22,6 +22,7 @@ import com.fastaoe.baselibrary.permission.PermissionHelper;
 import com.fastaoe.baselibrary.permission.PermissionSuccess;
 import com.fastaoe.framelibrary.BaseSkinActivity;
 import com.fastaoe.framelibrary.DefaultNavigationBar;
+import com.fastaoe.proficient.component.opengles.OpenGLFragment;
 import com.fastaoe.proficient.component.other.OtherFragment;
 import com.fastaoe.proficient.component.recycler.RecyclerFragment;
 import com.fastaoe.proficient.component.views.ViewFragment;
@@ -31,7 +32,7 @@ import com.fastaoe.proficient.weight.indicator.TrackIndicatorView;
 @ContentView(R.layout.activity_main)
 public class MainActivity extends BaseSkinActivity {
 
-    private String[] items = {"View", "Recycler", "RxJava", "Http", "Other"};
+    private String[] items = {"View", "Recycler", "OpenGL", "RxJava", "Http", "Other"};
 
     @Bind(R.id.trackView)
     TrackIndicatorView trackView;
@@ -127,7 +128,9 @@ public class MainActivity extends BaseSkinActivity {
                         return ViewFragment.newInstance(items[position]);
                     case 1:
                         return RecyclerFragment.newInstance(items[position]);
-                    case 4:
+                    case 2:
+                        return OpenGLFragment.newInstance(items[position]);
+                    case 5:
                         return OtherFragment.newInstance(items[position]);
                     default:
                         return DefaultFragment.newInstance(items[position]);
