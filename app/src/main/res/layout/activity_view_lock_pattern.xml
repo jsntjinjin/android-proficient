@@ -5,6 +5,7 @@
               android:layout_height="match_parent">
 
     <com.fastaoe.proficient.component.views.weight.LockPatternView
+        android:id="@+id/lock_pattern"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
